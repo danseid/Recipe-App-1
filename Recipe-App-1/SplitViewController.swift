@@ -8,12 +8,16 @@
 
 import Cocoa
 
-class SplitViewController: NSSplitViewController {
+class SplitViewController: NSSplitViewController, NSSplitViewDelegate {
+    
+    @IBOutlet weak var mainSplitView: NSSplitView!
+    @IBOutlet weak var sidebarSubView: NSSplitViewItem!
+    @IBOutlet weak var detailSubView: NSSplitViewItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        
+        self.mainSplitView.setPosition(150, ofDividerAtIndex: 0)
     }
     
 }

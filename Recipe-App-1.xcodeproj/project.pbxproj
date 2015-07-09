@@ -18,6 +18,7 @@
 		E371B6D21B4AD15C007EB63B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E371B6D11B4AD15C007EB63B /* Images.xcassets */; };
 		E371B6D51B4AD15C007EB63B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E371B6D31B4AD15C007EB63B /* Main.storyboard */; };
 		E371B6E11B4AD15D007EB63B /* Recipe_App_1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371B6E01B4AD15D007EB63B /* Recipe_App_1Tests.swift */; };
+		E3AD7FBA1B4EE79000A277A8 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AD7FB91B4EE79000A277A8 /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		E371B6DA1B4AD15D007EB63B /* Recipe-App-1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Recipe-App-1Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E371B6DF1B4AD15D007EB63B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E371B6E01B4AD15D007EB63B /* Recipe_App_1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe_App_1Tests.swift; sourceTree = "<group>"; };
+		E3AD7FB91B4EE79000A277A8 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				E371B6CD1B4AD15C007EB63B /* AppDelegate.swift */,
+				E3AD7FB91B4EE79000A277A8 /* WindowController.swift */,
 				E370F16C1B4C38E4004F0D2A /* SplitViewController.swift */,
 				E370F15E1B4C318F004F0D2A /* SidebarViewController.swift */,
 				E370F16A1B4C36C9004F0D2A /* DetailViewController.swift */,
@@ -246,6 +249,7 @@
 				E370F16D1B4C38E4004F0D2A /* SplitViewController.swift in Sources */,
 				E370F1671B4C32FA004F0D2A /* Ingredient.swift in Sources */,
 				E371B6CE1B4AD15C007EB63B /* AppDelegate.swift in Sources */,
+				E3AD7FBA1B4EE79000A277A8 /* WindowController.swift in Sources */,
 				E370F16B1B4C36C9004F0D2A /* DetailViewController.swift in Sources */,
 				E370F15F1B4C318F004F0D2A /* SidebarViewController.swift in Sources */,
 				E370F1651B4C32BD004F0D2A /* Recipe.swift in Sources */,

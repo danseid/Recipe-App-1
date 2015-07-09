@@ -12,14 +12,17 @@ class Category: NSObject {
 
     var name: String
     var desc: String
+    var icon: NSImage
     
     override init() {
         self.name = String()
         self.desc = String()
+        self.icon = NSImage()
     }
     
-    init(name: String, desc: String) {
+    init(name: String, desc: String, icon: NSImage) {
         self.name = name
         self.desc = desc
+        self.icon = icon
     }
 }

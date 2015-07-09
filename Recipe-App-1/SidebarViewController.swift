@@ -9,10 +9,21 @@
 import Cocoa
 
 class SidebarViewController: NSViewController {
+    
+    @IBOutlet weak var sidebarSearchField: NSSearchField!
+    @IBOutlet weak var sidebarOutlineView: NSOutlineView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
+
+    @IBAction func deleteRecipeButtonActive(sender: AnyObject) {
+    }
+
+    @IBAction func addRecipeButtonActive(sender: AnyObject) {
+    }
     
+    @IBAction func sidebarSearchFieldActive(sender: AnyObject) {
+    }
 }
