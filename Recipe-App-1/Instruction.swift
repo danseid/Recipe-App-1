@@ -11,14 +11,14 @@ import Cocoa
 class Instruction: NSObject {
     
     var text: String
-    var step: String
+    var step: Int
     
     override init() {
         self.text = String()
-        self.step = String()
+        self.step = Int()
     }
     
-    init(text: String, step: String) {
+    init(text: String, step: Int) {
         self.text = text
         self.step = step
     }

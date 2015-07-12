@@ -15,7 +15,7 @@ class Recipe: NSObject {
     var ingredients: [Ingredient]
     var instructions: [Instruction]
     var categories: [Category]
-    var pictures: [NSImage]
+    var pictures: [NSImage?]
     
     override init() {
         self.title = String()
@@ -26,7 +26,7 @@ class Recipe: NSObject {
         self.pictures = [NSImage]()
     }
     
-    init(title: String, rating: Double, ingredients: [Ingredient], instructions: [Instruction], categories: [Category], pictures: [NSImage]) {
+    init(title: String, rating: Double, ingredients: [Ingredient], instructions: [Instruction], categories: [Category], pictures: [NSImage?]) {
         self.title = title
         self.rating = rating
         self.ingredients = ingredients

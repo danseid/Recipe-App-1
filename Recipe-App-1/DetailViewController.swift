@@ -10,9 +10,15 @@ import Cocoa
 
 class DetailViewController: NSViewController {
 
+    @IBOutlet weak var recipeImageWell: NSImageView!
+    @IBOutlet weak var recipeTextField: NSTextField!
+    @IBOutlet weak var recipeIngredientsTableView: NSTableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
     
+    @IBAction func recipeImageWellActive(sender: AnyObject) {
+    }
 }

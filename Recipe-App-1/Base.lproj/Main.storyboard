@@ -798,6 +798,10 @@
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <outlet property="dataSource" destination="3zW-FO-qNw" id="gcZ-ey-UaB"/>
+                                                <outlet property="delegate" destination="3zW-FO-qNw" id="A9N-m4-EsX"/>
+                                            </connections>
                                         </outlineView>
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -865,6 +869,9 @@
                                     <constraint firstAttribute="height" constant="96" id="nxK-yK-GpU"/>
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="photo" id="YW1-zT-7MP"/>
+                                <connections>
+                                    <action selector="recipeImageWellActive:" target="7Bq-tt-Ypa" id="gey-1H-p69"/>
+                                </connections>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w1W-5W-PsI">
                                 <rect key="frame" x="307" y="278" width="125" height="17"/>
@@ -1017,6 +1024,11 @@
                             <constraint firstAttribute="trailing" secondItem="w1W-5W-PsI" secondAttribute="trailing" constant="20" id="ytp-1L-aPS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="recipeImageWell" destination="Zzs-k1-qPe" id="ESA-Uk-maf"/>
+                        <outlet property="recipeIngredientsTableView" destination="IKG-29-P9I" id="ob5-XJ-rHD"/>
+                        <outlet property="recipeTextField" destination="tJn-HF-dOi" id="ogt-rA-JTS"/>
+                    </connections>
                 </viewController>
                 <customObject id="BPJ-oV-NJf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
