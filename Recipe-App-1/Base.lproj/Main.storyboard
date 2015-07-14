@@ -778,13 +778,17 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView id="QVR-6y-Z8m">
-                                                            <rect key="frame" x="1" y="1" width="145" height="17"/>
+                                                        <tableCellView id="4Vh-im-ATm">
+                                                            <rect key="frame" x="1" y="20" width="145" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tbr-QP-PtA">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="ZnH-mz-XLv">
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ygx-uJ-hAE">
+                                                                    <rect key="frame" x="3" y="0.0" width="17" height="17"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="i1W-w3-j3a"/>
+                                                                </imageView>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7u-Dp-oDr">
+                                                                    <rect key="frame" x="25" y="0.0" width="125" height="17"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="rrn-V8-JvX">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -792,7 +796,8 @@
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
-                                                                <outlet property="textField" destination="Tbr-QP-PtA" id="5oh-t4-HeP"/>
+                                                                <outlet property="imageView" destination="ygx-uJ-hAE" id="HGd-4F-0EU"/>
+                                                                <outlet property="textField" destination="w7u-Dp-oDr" id="kxd-HY-Ssm"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -861,14 +866,14 @@
                 <viewController title="Detail View Controller" id="7Bq-tt-Ypa" customClass="DetailViewController" customModule="Recipe_App_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="acJ-e2-0f4">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zzs-k1-qPe">
-                                <rect key="frame" x="-3" y="201" width="456" height="102"/>
+                                <rect key="frame" x="0.0" y="204" width="450" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="96" id="nxK-yK-GpU"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="photo" id="YW1-zT-7MP"/>
+                                <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="YW1-zT-7MP"/>
                                 <connections>
                                     <action selector="recipeImageWellActive:" target="7Bq-tt-Ypa" id="gey-1H-p69"/>
                                 </connections>
@@ -1025,6 +1030,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dropImageLabel" destination="w1W-5W-PsI" id="xJD-zI-1RR"/>
                         <outlet property="recipeImageWell" destination="Zzs-k1-qPe" id="ESA-Uk-maf"/>
                         <outlet property="recipeIngredientsTableView" destination="IKG-29-P9I" id="ob5-XJ-rHD"/>
                         <outlet property="recipeTextField" destination="tJn-HF-dOi" id="ogt-rA-JTS"/>
@@ -1036,6 +1042,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSHomeTemplate" width="14" height="14"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>

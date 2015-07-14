@@ -11,10 +11,10 @@ import Cocoa
 class Ingredient: NSObject {
     
     var name: String
-    var quantity: Double
-    var unit: unitEnum
-    var preparation: String
-    var notes: String
+    var quantity: Double?
+    var unit: unitEnum?
+    var preparation: String?
+    var notes: String?
     
     override init() {
         self.name = String()
@@ -24,7 +24,7 @@ class Ingredient: NSObject {
         self.notes = String()
     }
     
-    init(name: String, quantity: Double, unit: unitEnum, preparation: String, notes: String) {
+    init(name: String, quantity: Double?, unit: unitEnum?, preparation: String?, notes: String?) {
         self.name = name
         self.quantity = quantity
         self.unit = unit
