@@ -12,17 +12,17 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
     
     @IBOutlet weak var sidebarSearchField: NSSearchField!
     @IBOutlet weak var sidebarOutlineView: NSOutlineView!
-    
-    var recipes = [Category: [Recipe]]()
-    var catList: [Category] {
-        get{return Array(recipes.keys)}
-    }
-    var displayRecipe: Recipe?
+    @IBOutlet weak var sidebarDeleteButton: NSButton!
 
+    var displayRecipe: Recipe?
+    
+    var recipes = [Recipe]()
+    var categories = [Category]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        self.setupNewRecipesCategory()
         self.setupSampleRecipes()
     }
     
@@ -33,21 +33,56 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
     }
     
     func setupSampleRecipes() {
-        let sampleRecipe1 = Recipe(title: "Salmon", rating: 4.0, ingredients: [Ingredient(name: "Salmon Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [Category(name: "Fish", desc: "Fish dishes", icon: nil)], image: NSImage(named: "Salmon"))
-        let sampleRecipe2 = Recipe(title: "Tuna", rating: 3.0, ingredients: [Ingredient(name: "Tuna Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [Category(name: "Fish", desc: "Fish dishes", icon: nil)], image: NSImage(named: "Tuna"))
-        let sampleRecipe3 = Recipe(title: "Paella", rating: 5.0, ingredients: [Ingredient(name: "Chicken Thighs", quantity: 4.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [Category(name: "Rice Dishes", desc: "Rice dishes", icon: nil)], image: NSImage(named: "Paella"))
+        let sampleRecipe1 = Recipe(name: "Salmon", rating: 4.0, ingredients: [Ingredient(name: "Salmon Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: nil, image: NSImage(named: "Salmon"))
+        let sampleRecipe2 = Recipe(name: "Tuna", rating: 3.0, ingredients: [Ingredient(name: "Tuna Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: nil, image: NSImage(named: "Tuna"))
+        let sampleRecipe3 = Recipe(name: "Paella", rating: 5.0, ingredients: [Ingredient(name: "Chicken Thighs", quantity: 4.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: nil, image: NSImage(named: "Paella"))
         
-        let sampleCategory1 = Category(name: "Sample Category 1", desc: "This is sample 1", icon: nil)
-        let sampleCategory2 = Category(name: "Sample Category 2", desc: "This is sample 2", icon: nil)
+        let sampleCategory1 = Category(name: "Sample Category 1", desc: "This is sample 1", recipes: [sampleRecipe1, sampleRecipe2, sampleRecipe3], icon: nil)
+        let sampleCategory2 = Category(name: "Sample Category 2", desc: "This is sample 2", recipes: [sampleRecipe2, sampleRecipe3], icon: nil)
         
-        recipes = [sampleCategory1: [sampleRecipe1, sampleRecipe2, sampleRecipe3], sampleCategory2: [sampleRecipe2, sampleRecipe3]]
+        sampleRecipe1.addCategory(sampleCategory1)
+        sampleRecipe2.addCategory(sampleCategory1)
+        sampleRecipe2.addCategory(sampleCategory2)
+        sampleRecipe3.addCategory(sampleCategory1)
+        sampleRecipe3.addCategory(sampleCategory2)
+
+        self.recipes.append(sampleRecipe1)
+        self.recipes.append(sampleRecipe2)
+        self.recipes.append(sampleRecipe3)
+        self.categories.append(sampleCategory1)
+        self.categories.append(sampleCategory2)
     }
     
-
-    @IBAction func deleteRecipeButtonActive(sender: AnyObject) {
+    func setupNewRecipesCategory() {  // Setup New Recipes category, the default initial category for all recipes
+        let newRecipesCategory = Category(name: "New Recipes", desc: "The most recently added recipes", recipes: nil, icon: nil)
+        self.categories.append(newRecipesCategory)
     }
 
-    @IBAction func addRecipeButtonActive(sender: AnyObject) {
+    @IBAction func deleteRecipeButtonActive(sender: AnyObject) {
+        let selectedItem: AnyObject? = self.sidebarOutlineView.itemAtRow(self.sidebarOutlineView.selectedRow)
+        let selectedItemParent: AnyObject? = self.sidebarOutlineView.parentForItem(selectedItem)
+        switch selectedItem {
+        case let recipe as Recipe:
+            println(recipe.name)
+        case let category as Category:
+            println(category.name)
+        default:
+            println("Invalid item")
+        }
+    }
+
+    @IBAction func addRecipeButtonActive(sender: AnyObject) {  // Implement 'Add recipe' Button
+        let newRecipesCategory = self.categories[0]  // All new recipes added to New Recipes category by default
+        let newRecipe = Recipe(name: "New Recipe", rating: nil, ingredients: nil, instructions: nil, categories: [newRecipesCategory], image: nil)
+        self.recipes.append(newRecipe)
+        newRecipesCategory.addRecipe(newRecipe)
+        
+        self.sidebarOutlineView.reloadItem(newRecipesCategory)  // Reload OutlineView
+        self.sidebarOutlineView.expandItem(newRecipesCategory)  // Expand New Recipes category
+        
+        let newRowIndex = newRecipesCategory.recipes.count
+        self.sidebarOutlineView.selectRowIndexes(NSIndexSet(index: newRowIndex), byExtendingSelection: false) // Select to display in DetailView
+        self.sidebarOutlineView.scrollRowToVisible(newRowIndex)  // Scroll OutlineView to display the correct row
     }
     
     @IBAction func sidebarSearchFieldActive(sender: AnyObject) {
@@ -57,11 +92,11 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
     
     func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
         if let it = item as? Category {  // If selected item is category,
-            if let recipeList = self.recipes[it] as [Recipe]? {  // Unwrap its children recipes
-                return recipeList[index]
+            if let recipes = it.recipes as [Recipe]? {
+                return recipes[index]
             }
         }
-        return (self.catList[index] as Category?)!  // If at root view, items will be categories
+        return self.categories[index] as Category  // If at root view, items will be categories
     }
     
     func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
@@ -80,13 +115,13 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
         if let it = item as? Category {
             return self.numberOfRecipesInCategory(it)
         } else {
-            return recipes.count
+            return self.categories.count
         }
     }
     
     func numberOfRecipesInCategory(category: Category) -> Int {
-        if let recs = self.recipes[category] {
-            return recs.count
+        if let recipes = category.recipes as [Recipe]? {
+            return recipes.count
         } else {
             return 0
         }
@@ -107,7 +142,7 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
         case let recipe as Recipe:
             let view = sidebarOutlineView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
             if let textField = view.textField {
-                textField.stringValue = recipe.title
+                textField.stringValue = recipe.name
             }
             if let image = recipe.image as NSImage? {
                 view.imageView!.image = image
@@ -127,6 +162,12 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
             if let detailView = self.parentViewController?.childViewControllers[1] as? DetailViewController { // Send object details to Detail VC
                 detailView.displayRecipe = self.displayRecipe
             }
+        }
+        
+        if object != nil {
+            self.sidebarDeleteButton.enabled = true  // Enable delete button now that item is selected
+        } else {
+            self.sidebarDeleteButton.enabled = false
         }
     }
     

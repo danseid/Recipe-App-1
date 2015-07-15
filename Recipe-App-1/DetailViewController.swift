@@ -30,7 +30,7 @@ class DetailViewController: NSViewController {
     func configureDisplayRecipe() {
         // Update the user interface for the detail item.
         if let recipe: Recipe = self.displayRecipe {
-            self.recipeTextField.stringValue = recipe.title
+            self.recipeTextField.stringValue = recipe.name
             self.recipeImageWell.image = recipe.image
             if self.recipeImageWell.image != nil {
                 self.dropImageLabel.stringValue = ""

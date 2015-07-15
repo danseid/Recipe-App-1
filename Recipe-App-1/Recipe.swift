@@ -10,15 +10,15 @@ import Cocoa
 
 class Recipe: NSObject {
     
-    var title: String
+    var name: String
     var rating: Double?
     var ingredients: [Ingredient]?
     var instructions: [Instruction]?
-    var categories: [Category]?
+    var categories: [Category]
     var image: NSImage?
     
     override init() {
-        self.title = String()
+        self.name = String()
         self.rating = 0.0
         self.ingredients = [Ingredient]()
         self.instructions = [Instruction]()
@@ -26,12 +26,24 @@ class Recipe: NSObject {
         self.image = NSImage()
     }
     
-    init(title: String, rating: Double?, ingredients: [Ingredient]?, instructions: [Instruction]?, categories: [Category]?, image: NSImage?) {
-        self.title = title
+    init(name: String, rating: Double?, ingredients: [Ingredient]?, instructions: [Instruction]?, categories: [Category]?, image: NSImage?) {
+        self.name = name
         self.rating = rating
         self.ingredients = ingredients
         self.instructions = instructions
-        self.categories = categories
+        if let cats = categories {
+            self.categories = cats
+        } else {
+            self.categories = [Category]()
+        }
         self.image = image
+    }
+    
+    func addCategory(category: Category) {
+        self.categories.append(category)
+    }
+    
+    func removeCategory(category: Category) {
+        self.categories = self.categories.filter({$0 != category})
     }
 }
