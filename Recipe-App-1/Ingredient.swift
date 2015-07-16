@@ -36,4 +36,39 @@ class Ingredient: NSObject {
         case none, kg, g, tbsp, tsp, l, ml
     }
     
+    func unitDisplayString() -> String {  // Return the display format of the unit type
+        switch self.unit! {
+        case .none: return ""
+        case .kg:   return "kg"
+        case .g:    return "g"
+        case .tbsp: return "tbsp"
+        case .tsp:  return "tsp"
+        case .l:    return "l"
+        case .ml:    return "ml"
+        default:
+            return ""
+        }
+    }
+    
+    func tableDisplayString() -> String {  // Return a ingredient format to display in DetailView table
+        var integerQuantity: Int
+        if let quantity = self.quantity as Double? {
+            if quantity % 1.0 == 0 {  // Avoid unnecessary decimal points
+                integerQuantity = Int(quantity)
+                if let unit = self.unit as unitEnum? {
+                    return "\(integerQuantity)" + unitDisplayString() + " " +  self.name
+                } else {
+                    return "\(integerQuantity)" + self.name
+                }
+            } else {
+                if let unit = self.unit as unitEnum? {
+                    return "\(quantity)" + unitDisplayString() + " " + self.name
+                } else {
+                    return "\(quantity)" + self.name
+                }
+            }
+        }
+        return self.name
+    }
+    
 }

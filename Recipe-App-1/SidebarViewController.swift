@@ -83,6 +83,10 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
         let newRowIndex = newRecipesCategory.recipes.count
         self.sidebarOutlineView.selectRowIndexes(NSIndexSet(index: newRowIndex), byExtendingSelection: false) // Select to display in DetailView
         self.sidebarOutlineView.scrollRowToVisible(newRowIndex)  // Scroll OutlineView to display the correct row
+        
+        if let detailView = self.parentViewController!.childViewControllers[1] as? DetailViewController {
+            detailView.recipeTextField.becomeFirstResponder()
+        }
     }
     
     @IBAction func sidebarSearchFieldActive(sender: AnyObject) {

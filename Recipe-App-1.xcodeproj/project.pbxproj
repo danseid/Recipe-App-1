@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E36561421B580FE6007CC9ED /* IngredientsPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36561411B580FE6007CC9ED /* IngredientsPopover.swift */; };
 		E370F15F1B4C318F004F0D2A /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370F15E1B4C318F004F0D2A /* SidebarViewController.swift */; };
 		E370F1651B4C32BD004F0D2A /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370F1641B4C32BD004F0D2A /* Recipe.swift */; };
 		E370F1671B4C32FA004F0D2A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370F1661B4C32FA004F0D2A /* Ingredient.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E36561411B580FE6007CC9ED /* IngredientsPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsPopover.swift; sourceTree = "<group>"; };
 		E370F15E1B4C318F004F0D2A /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E370F1641B4C32BD004F0D2A /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		E370F1661B4C32FA004F0D2A /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				E370F16C1B4C38E4004F0D2A /* SplitViewController.swift */,
 				E370F15E1B4C318F004F0D2A /* SidebarViewController.swift */,
 				E370F16A1B4C36C9004F0D2A /* DetailViewController.swift */,
+				E36561411B580FE6007CC9ED /* IngredientsPopover.swift */,
 				E371B6D31B4AD15C007EB63B /* Main.storyboard */,
 			);
 			name = GUI;
@@ -251,6 +254,7 @@
 				E371B6CE1B4AD15C007EB63B /* AppDelegate.swift in Sources */,
 				E3AD7FBA1B4EE79000A277A8 /* WindowController.swift in Sources */,
 				E370F16B1B4C36C9004F0D2A /* DetailViewController.swift in Sources */,
+				E36561421B580FE6007CC9ED /* IngredientsPopover.swift in Sources */,
 				E370F15F1B4C318F004F0D2A /* SidebarViewController.swift in Sources */,
 				E370F1651B4C32BD004F0D2A /* Recipe.swift in Sources */,
 				E370F16F1B4C49E2004F0D2A /* Category.swift in Sources */,
