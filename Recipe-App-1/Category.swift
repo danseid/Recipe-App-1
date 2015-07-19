@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Category: NSObject {
+class Category: NSObject, NSCoding {
 
     var name: String
     var desc: String?
@@ -35,5 +35,20 @@ class Category: NSObject {
     
     func removeRecipe(recipe: Recipe) {
         self.recipes = self.recipes.filter({$0 != recipe})
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(self.name, forKey: "name")
+        coder.encodeObject(self.desc, forKey: "desc")
+        coder.encodeObject(self.recipes, forKey: "recipes")
+        coder.encodeObject(self.icon, forKey: "icon")
+    }
+    
+    required convenience init(coder decoder: NSCoder) {
+        self.init()
+        self.name = decoder.decodeObjectForKey( "name" ) as! String
+        self.desc = decoder.decodeObjectForKey( "desc" ) as! String?
+        self.recipes = decoder.decodeObjectForKey( "recipes" ) as! [Recipe]
+        self.icon = decoder.decodeObjectForKey( "icon" ) as! NSImage?
     }
 }

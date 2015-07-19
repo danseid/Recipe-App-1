@@ -22,8 +22,8 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        self.setupNewRecipesCategory()
-        self.setupSampleRecipes()
+        //self.setupNewRecipesCategory()
+        //self.setupSampleRecipes()
     }
     
     override var representedObject: AnyObject? {
@@ -179,5 +179,13 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
         let indexSet = NSIndexSet(index: self.sidebarOutlineView.selectedRow)
         let columnSet = NSIndexSet(index: 0)
         self.sidebarOutlineView.reloadDataForRowIndexes(indexSet, columnIndexes: columnSet)
+    }
+    
+    func saveData() {
+        let recipesdata = NSKeyedArchiver.archivedDataWithRootObject(self.recipes)
+        let categoriesdata = NSKeyedArchiver.archivedDataWithRootObject(self.categories)
+        NSUserDefaults.standardUserDefaults().setObject(recipesdata, forKey: "recipes")
+        NSUserDefaults.standardUserDefaults().setObject(categoriesdata, forKey: "categories")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
 }

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Ingredient: NSObject {
+class Ingredient: NSObject, NSCoding {
     
     var name: String
     var quantity: Double?
@@ -32,22 +32,31 @@ class Ingredient: NSObject {
         self.notes = notes
     }
     
-    enum unitEnum {
-        case none, kg, g, tbsp, tsp, l, ml
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(self.name, forKey: "name")
+        coder.encodeObject(self.quantity, forKey: "quantity")
+        coder.encodeObject(self.unit?.rawValue, forKey: "unit" )
+        coder.encodeObject(self.preparation, forKey: "preparation")
+        coder.encodeObject(self.notes, forKey: "notes")
     }
     
-    func unitDisplayString() -> String {  // Return the display format of the unit type
-        switch self.unit! {
-        case .none: return ""
-        case .kg:   return "kg"
-        case .g:    return "g"
-        case .tbsp: return "tbsp"
-        case .tsp:  return "tsp"
-        case .l:    return "l"
-        case .ml:    return "ml"
-        default:
-            return ""
-        }
+    required convenience init(coder decoder: NSCoder) {
+        self.init()
+        self.name = decoder.decodeObjectForKey( "name" ) as! String
+        self.quantity = decoder.decodeObjectForKey( "quantity" ) as! Double?
+        self.unit = unitEnum(rawValue: decoder.decodeObjectForKey("unit" ) as! String )
+        self.preparation = decoder.decodeObjectForKey( "preparation" ) as! String?
+        self.notes = decoder.decodeObjectForKey( "notes" ) as! String?
+    }
+    
+    enum unitEnum : String {
+        case none = "",
+        kg = "kg",
+        g = "g",
+        tbsp = "tbsp",
+        tsp = "tsp",
+        l = "l",
+        ml = "ml"
     }
     
     func tableDisplayString() -> String {  // Return a ingredient format to display in DetailView table
@@ -56,13 +65,13 @@ class Ingredient: NSObject {
             if quantity % 1.0 == 0 {  // Avoid unnecessary decimal points
                 integerQuantity = Int(quantity)
                 if let unit = self.unit as unitEnum? {
-                    return "\(integerQuantity)" + unitDisplayString() + " " +  self.name
+                    return "\(integerQuantity)" + unit.rawValue + " " +  self.name
                 } else {
                     return "\(integerQuantity)" + self.name
                 }
             } else {
                 if let unit = self.unit as unitEnum? {
-                    return "\(quantity)" + unitDisplayString() + " " + self.name
+                    return "\(quantity)" + unit.rawValue + " " + self.name
                 } else {
                     return "\(quantity)" + self.name
                 }

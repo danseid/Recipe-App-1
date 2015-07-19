@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Instruction: NSObject {
+class Instruction: NSObject, NSCoding {
     
     var text: String
     var step: Int
@@ -21,5 +21,16 @@ class Instruction: NSObject {
     init(text: String, step: Int) {
         self.text = text
         self.step = step
+    }
+    
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(self.text, forKey: "text")
+        coder.encodeObject(self.step, forKey: "step")
+    }
+    
+    required convenience init(coder decoder: NSCoder) {
+        self.init()
+        self.text = decoder.decodeObjectForKey( "text" ) as! String
+        self.step = decoder.decodeObjectForKey( "step" ) as! Int
     }
 }

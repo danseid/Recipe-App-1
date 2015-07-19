@@ -11,13 +11,30 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    var sidebarViewController: SidebarViewController!
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
+        
+        sidebarViewController = SidebarViewController(nibName: "SidebarViewController", bundle: nil)
+        
+        if let recipes = NSUserDefaults.standardUserDefaults().objectForKey("recipes") as? NSData {
+            sidebarViewController.recipes = NSKeyedUnarchiver.unarchiveObjectWithData(recipes) as! [Recipe]
+        } else {
+            sidebarViewController.setupNewRecipesCategory()
+            sidebarViewController.setupSampleRecipes()
+        }
+        
+        if let categories = NSUserDefaults.standardUserDefaults().objectForKey("categories") as? NSData {
+            sidebarViewController.categories = NSKeyedUnarchiver.unarchiveObjectWithData(categories) as! [Category]
+        } else {
+        }
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
+        
+        self.sidebarViewController.saveData()
     }
 
 }
