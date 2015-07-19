@@ -12,8 +12,10 @@ class DetailViewController: NSViewController, NSTableViewDataSource, NSTableView
 
     @IBOutlet weak var recipeImageWell: NSImageView!
     @IBOutlet weak var recipeTextField: NSTextField!
-    @IBOutlet weak var recipeIngredientsTableView: NSTableView!
+    @IBOutlet weak var recipeIngredientsOutlineView: NSOutlineView!
     @IBOutlet weak var dropImageLabel: NSTextField!
+    
+    var recipe = Recipe()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +32,14 @@ class DetailViewController: NSViewController, NSTableViewDataSource, NSTableView
     func configureDisplayRecipe() {
         // Update the user interface for the detail item.
         if let recipe: Recipe = self.displayRecipe {
+            self.recipe = recipe
             self.recipeTextField.enabled = true
             self.recipeTextField.stringValue = recipe.name
             self.recipeImageWell.image = recipe.image
             if self.recipeImageWell.image != nil {
                 self.dropImageLabel.stringValue = ""
             }
-            self.recipeIngredientsTableView.reloadData()
+            self.recipeIngredientsOutlineView.reloadData()
         }
     }
     
@@ -51,46 +54,54 @@ class DetailViewController: NSViewController, NSTableViewDataSource, NSTableView
         self.updateSidebarViewController()
     }
     
-    @IBAction func recipeIngredientFinishEditing(sender: AnyObject) {
-    }
-    
     func updateSidebarViewController() {
         if let sidebarView = self.parentViewController!.childViewControllers[0] as? SidebarViewController {
             sidebarView.reloadSelectedRecipeRow()
         }
     }
+
+    // Functions to implement NSOutlineView DataSource
     
-    // TableView DataSource implementation
-    
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        if let recipe = self.displayRecipe as Recipe? {
-            if let ingredients = recipe.ingredients as [Ingredient]? {
-                return ingredients.count + 1
-            }
-        }
-        return 1
+    func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
+        return self.recipe.ingredients[index]
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let view = recipeIngredientsTableView.makeViewWithIdentifier("Ingredient Column", owner: self) as! NSTableCellView
-        if let recipe = self.displayRecipe as Recipe?{
-            if let ingredients = recipe.ingredients as [Ingredient]? {
-                if row < ingredients.count {
-                    view.textField!.stringValue = ingredients[row].tableDisplayString()
-                } else {
-                    view.textField!.stringValue = "Add ingredient"
-                }
-            } else {
-                view.textField!.stringValue = "Add ingredient"
-            }
-        }
-        return view
+    func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
+        return false
     }
     
-    // TableView Delegate implementation
+    func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
+        return self.recipe.ingredients.count
+    }
     
-    func tableViewSelectionDidChange(notification: NSNotification) {
-        
+    // Function to implement the NSOutlineView Delegate
+    
+    func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
+        switch item {  // Setup different TableViewCells depending on the type of item selected
+        case let ingredient as Ingredient:
+            let view = recipeIngredientsOutlineView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
+            if let textField = view.textField {
+                textField.stringValue = ingredient.tableDisplayString()
+            }
+            return view
+        case let recipe as Recipe:
+            let view = recipeIngredientsOutlineView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
+            if let textField = view.textField {
+                textField.stringValue = recipe.name
+            }
+            if let image = recipe.image as NSImage? {
+                view.imageView!.image = image
+            }
+            return view
+        default:
+            return nil
+        }
+    }
+    
+    func outlineViewSelectionDidChange(notification: NSNotification){  // Retrieve selected object from OutlineView
+//        var selectedIndex = notification.object?.selectedRow
+//        var object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
+
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {

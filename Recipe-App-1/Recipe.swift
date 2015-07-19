@@ -12,8 +12,8 @@ class Recipe: NSObject {
     
     var name: String
     var rating: Double?
-    var ingredients: [Ingredient]?
-    var instructions: [Instruction]?
+    var ingredients: [Ingredient]
+    var instructions: [Instruction]
     var categories: [Category]
     var image: NSImage?
     
@@ -26,16 +26,12 @@ class Recipe: NSObject {
         self.image = NSImage()
     }
     
-    init(name: String, rating: Double?, ingredients: [Ingredient]?, instructions: [Instruction]?, categories: [Category]?, image: NSImage?) {
+    init(name: String, rating: Double?, ingredients: [Ingredient], instructions: [Instruction], categories: [Category], image: NSImage?) {
         self.name = name
         self.rating = rating
         self.ingredients = ingredients
         self.instructions = instructions
-        if let cats = categories {
-            self.categories = cats
-        } else {
-            self.categories = [Category]()
-        }
+        self.categories = categories
         self.image = image
     }
     

@@ -22,14 +22,10 @@ class Category: NSObject {
         self.icon = NSImage()
     }
     
-    init(name: String, desc: String?, recipes: [Recipe]?, icon: NSImage?) {
+    init(name: String, desc: String?, recipes: [Recipe], icon: NSImage?) {
         self.name = name
         self.desc = desc
-        if let recs = recipes {
-            self.recipes = recs
-        } else {
-            self.recipes = [Recipe]()
-        }
+        self.recipes = recipes
         self.icon = icon
     }
     
