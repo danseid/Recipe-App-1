@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class DetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
 
     @IBOutlet weak var recipeImageWell: NSImageView!
     @IBOutlet weak var recipeTextField: NSTextField!
@@ -19,6 +19,7 @@ class DetailViewController: NSViewController, NSTableViewDataSource, NSTableView
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.recipeIngredientsOutlineView.headerView.
         // Do view setup here.
     }
     
@@ -63,34 +64,63 @@ class DetailViewController: NSViewController, NSTableViewDataSource, NSTableView
     // Functions to implement NSOutlineView DataSource
     
     func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
-        return self.recipe.ingredients[index]
+        if let it = item as? IngredientGroup {
+            if let ingredients = self.recipe.ingredients[it] as [Ingredient]? {
+                return ingredients[index]
+            }
+        }
+        return self.recipe.ingredientGroups[index] as IngredientGroup
     }
     
     func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
+        if let it = item as? IngredientGroup {
+            if self.numberofIngredientsInGroup(it) > 0 {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    func outlineView(outlineView: NSOutlineView, isItemExpanded item: AnyObject) -> Bool {
+        if let it = item as? IngredientGroup {
+            return it.isExpanded
+        }
         return false
     }
     
+    
+    
     func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
-        return self.recipe.ingredients.count
+        if let it = item as? IngredientGroup {
+            return self.numberofIngredientsInGroup(it)
+        }
+        return self.recipe.ingredientGroups.count
     }
     
+    func numberofIngredientsInGroup(group: IngredientGroup) -> Int {
+        if let ingredients = self.recipe.ingredients[group] {
+            return ingredients.count
+        }
+        return 0
+    }
+
     // Function to implement the NSOutlineView Delegate
     
     func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
         switch item {  // Setup different TableViewCells depending on the type of item selected
         case let ingredient as Ingredient:
-            let view = recipeIngredientsOutlineView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
+            let view = self.recipeIngredientsOutlineView.makeViewWithIdentifier("IngredientCell", owner: self) as! NSTableCellView
             if let textField = view.textField {
                 textField.stringValue = ingredient.tableDisplayString()
             }
             return view
-        case let recipe as Recipe:
-            let view = recipeIngredientsOutlineView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
+        case let group as IngredientGroup:
+            let view = self.recipeIngredientsOutlineView.makeViewWithIdentifier("GroupCell", owner: self) as! NSTableCellView
             if let textField = view.textField {
-                textField.stringValue = recipe.name
-            }
-            if let image = recipe.image as NSImage? {
-                view.imageView!.image = image
+                textField.stringValue = group.name
             }
             return view
         default:

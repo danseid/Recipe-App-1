@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E36561421B580FE6007CC9ED /* IngredientsPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36561411B580FE6007CC9ED /* IngredientsPopover.swift */; };
+		E36561441B5BFF55007CC9ED /* IngredientGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36561431B5BFF55007CC9ED /* IngredientGroup.swift */; };
 		E370F15F1B4C318F004F0D2A /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370F15E1B4C318F004F0D2A /* SidebarViewController.swift */; };
 		E370F1651B4C32BD004F0D2A /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370F1641B4C32BD004F0D2A /* Recipe.swift */; };
 		E370F1671B4C32FA004F0D2A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370F1661B4C32FA004F0D2A /* Ingredient.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		E36561411B580FE6007CC9ED /* IngredientsPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsPopover.swift; sourceTree = "<group>"; };
+		E36561431B5BFF55007CC9ED /* IngredientGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientGroup.swift; sourceTree = "<group>"; };
 		E370F15E1B4C318F004F0D2A /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E370F1641B4C32BD004F0D2A /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		E370F1661B4C32FA004F0D2A /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				E370F1641B4C32BD004F0D2A /* Recipe.swift */,
 				E370F1681B4C3498004F0D2A /* Instruction.swift */,
 				E370F1661B4C32FA004F0D2A /* Ingredient.swift */,
+				E36561431B5BFF55007CC9ED /* IngredientGroup.swift */,
 				E370F16E1B4C49E2004F0D2A /* Category.swift */,
 			);
 			name = Model;
@@ -258,6 +261,7 @@
 				E370F15F1B4C318F004F0D2A /* SidebarViewController.swift in Sources */,
 				E370F1651B4C32BD004F0D2A /* Recipe.swift in Sources */,
 				E370F16F1B4C49E2004F0D2A /* Category.swift in Sources */,
+				E36561441B5BFF55007CC9ED /* IngredientGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

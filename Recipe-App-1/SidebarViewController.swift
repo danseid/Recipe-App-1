@@ -33,9 +33,9 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
     }
     
     func setupSampleRecipes() {
-        let sampleRecipe1 = Recipe(name: "Salmon", rating: 4.0, ingredients: [Ingredient(name: "Salmon Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [], image: NSImage(named: "Salmon"))
-        let sampleRecipe2 = Recipe(name: "Tuna", rating: 3.0, ingredients: [Ingredient(name: "Tuna Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [], image: NSImage(named: "Tuna"))
-        let sampleRecipe3 = Recipe(name: "Paella", rating: 5.0, ingredients: [Ingredient(name: "Chicken Thighs", quantity: 4.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [], image: NSImage(named: "Paella"))
+        let sampleRecipe1 = Recipe(name: "Salmon", rating: 4.0, ingredients: [IngredientGroup(name: "Group 1"): [Ingredient(name: "Salmon Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: "")], IngredientGroup(name: "Group 2"): [Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")]], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [], image: NSImage(named: "Salmon"))
+        let sampleRecipe2 = Recipe(name: "Tuna", rating: 3.0, ingredients: [IngredientGroup(name: "noGroup"): [Ingredient(name: "Tuna Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")]], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [], image: NSImage(named: "Tuna"))
+        let sampleRecipe3 = Recipe(name: "Paella", rating: 5.0, ingredients: [IngredientGroup(name: "noGroup"): [Ingredient(name: "Chicken Thighs", quantity: 4.0, unit: Ingredient.unitEnum.none, preparation: "", notes: ""), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "")]], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [], image: NSImage(named: "Paella"))
         
         let sampleCategory1 = Category(name: "Sample Category 1", desc: "This is sample 1", recipes: [sampleRecipe1, sampleRecipe2, sampleRecipe3], icon: nil)
         let sampleCategory2 = Category(name: "Sample Category 2", desc: "This is sample 2", recipes: [sampleRecipe2, sampleRecipe3], icon: nil)
@@ -73,7 +73,7 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
 
     @IBAction func addRecipeButtonActive(sender: AnyObject) {  // Implement 'Add recipe' Button
         let newRecipesCategory = self.categories[0]  // All new recipes added to New Recipes category by default
-        let newRecipe = Recipe(name: "New Recipe", rating: nil, ingredients: [], instructions: [], categories: [newRecipesCategory], image: nil)
+        let newRecipe = Recipe(name: "New Recipe", rating: nil, ingredients: [:], instructions: [], categories: [newRecipesCategory], image: nil)
         self.recipes.append(newRecipe)
         newRecipesCategory.addRecipe(newRecipe)
         
