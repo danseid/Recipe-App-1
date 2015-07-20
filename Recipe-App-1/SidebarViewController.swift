@@ -22,6 +22,8 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        let appdelegate = NSApplication.sharedApplication().delegate as? AppDelegate
+        appdelegate?.sidebarViewController = self
         //self.setupNewRecipesCategory()
         //self.setupSampleRecipes()
     }
