@@ -21,15 +21,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        NSUserDefaults.standardUserDefaults().removeObjectForKey("recipes")
 //        NSUserDefaults.standardUserDefaults().removeObjectForKey("categories")
         
+        //println(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())
+
+        
         if let recipes = NSUserDefaults.standardUserDefaults().objectForKey("recipes") as? NSData {
-            sidebarViewController.recipes = NSKeyedUnarchiver.unarchiveObjectWithData(recipes) as! [Recipe]
+            if let unarchived = NSKeyedUnarchiver.unarchiveObjectWithData(recipes) as? [Recipe] {
+                self.sidebarViewController.recipes = unarchived
+            }
         } else {
-            sidebarViewController.setupNewRecipesCategory()
-            sidebarViewController.setupSampleRecipes()
+            self.sidebarViewController.setupNewRecipesCategory()
+            self.sidebarViewController.setupSampleRecipes()
         }
         
         if let categories = NSUserDefaults.standardUserDefaults().objectForKey("categories") as? NSData {
-            sidebarViewController.categories = NSKeyedUnarchiver.unarchiveObjectWithData(categories) as! [Category]
+            self.sidebarViewController.categories = NSKeyedUnarchiver.unarchiveObjectWithData(categories) as! [Category]
         } else {
         }
         self.sidebarViewController.sidebarOutlineView.reloadData()

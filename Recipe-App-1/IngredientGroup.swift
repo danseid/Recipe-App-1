@@ -11,27 +11,32 @@ import Cocoa
 class IngredientGroup: NSObject, NSCoding {
     
     var name: String
-    var isExpanded: Bool
+    var ingredients: [Ingredient]
+    //var isExpanded: Bool
     
     override init() {
         self.name = String()
-        self.isExpanded = Bool()
+        self.ingredients = [Ingredient]()
+        //self.isExpanded = Bool()
     }
     
-    init(name: String) {
+    init(name: String, ingredients: [Ingredient]) {
         self.name = name
-        self.isExpanded = true
+        self.ingredients = ingredients
+        //self.isExpanded = true
     }
     
     func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(self.name, forKey: "name")
-        coder.encodeObject(self.isExpanded, forKey: "isExpanded")
+        coder.encodeObject(self.name, forKey: "ingredientGroupName")
+        coder.encodeObject(self.ingredients, forKey: "ingredientGroupIngredients")
+        //coder.encodeObject(self.isExpanded, forKey: "ingredientGroupIsExpanded")
     }
     
     required convenience init(coder decoder: NSCoder) {
         self.init()
-        self.name = decoder.decodeObjectForKey( "name" ) as! String
-        self.isExpanded = decoder.decodeObjectForKey( "isExpanded" ) as! Bool
+        self.name = decoder.decodeObjectForKey( "ingredientGroupName" ) as! String
+        self.ingredients = decoder.decodeObjectForKey("ingredientGroupIngredients") as! [Ingredient]
+        //self.isExpanded = decoder.decodeObjectForKey( "ingredientGroupIsExpanded" ) as! Bool
     }
 
 }

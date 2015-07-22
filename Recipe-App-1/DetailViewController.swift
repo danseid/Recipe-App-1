@@ -65,7 +65,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     
     func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
         if let it = item as? IngredientGroup {
-            if let ingredients = self.recipe.ingredients[it] as [Ingredient]? {
+            if let ingredients = it.ingredients as [Ingredient]? {
                 return ingredients[index]
             }
         }
@@ -74,7 +74,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     
     func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
         if let it = item as? IngredientGroup {
-            if self.numberofIngredientsInGroup(it) > 0 {
+            if it.ingredients.count > 0 {
                 return true
             } else {
                 return false
@@ -84,27 +84,18 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         }
     }
     
-    func outlineView(outlineView: NSOutlineView, isItemExpanded item: AnyObject) -> Bool {
-        if let it = item as? IngredientGroup {
-            return it.isExpanded
-        }
-        return false
-    }
-    
-    
+//    func outlineView(outlineView: NSOutlineView, isItemExpanded item: AnyObject) -> Bool {
+//        if let it = item as? IngredientGroup {
+//            return it.isExpanded
+//        }
+//        return false
+//    }
     
     func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
         if let it = item as? IngredientGroup {
-            return self.numberofIngredientsInGroup(it)
+            return it.ingredients.count
         }
         return self.recipe.ingredientGroups.count
-    }
-    
-    func numberofIngredientsInGroup(group: IngredientGroup) -> Int {
-        if let ingredients = self.recipe.ingredients[group] {
-            return ingredients.count
-        }
-        return 0
     }
 
     // Function to implement the NSOutlineView Delegate

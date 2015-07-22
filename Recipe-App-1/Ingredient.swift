@@ -33,20 +33,20 @@ class Ingredient: NSObject, NSCoding {
     }
     
     func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(self.name, forKey: "name")
-        coder.encodeObject(self.quantity, forKey: "quantity")
-        coder.encodeObject(self.unit?.rawValue, forKey: "unit" )
-        coder.encodeObject(self.preparation, forKey: "preparation")
-        coder.encodeObject(self.notes, forKey: "notes")
+        coder.encodeObject(self.name, forKey: "ingredientName")
+        coder.encodeObject(self.quantity, forKey: "ingredientQuantity")
+        coder.encodeObject(self.unit?.rawValue, forKey: "ingredientUnit" )
+        coder.encodeObject(self.preparation, forKey: "ingredientPreparation")
+        coder.encodeObject(self.notes, forKey: "ingredientNotes")
     }
     
     required convenience init(coder decoder: NSCoder) {
         self.init()
-        self.name = decoder.decodeObjectForKey( "name" ) as! String
-        self.quantity = decoder.decodeObjectForKey( "quantity" ) as! Double?
-        self.unit = unitEnum(rawValue: decoder.decodeObjectForKey("unit" ) as! String )
-        self.preparation = decoder.decodeObjectForKey( "preparation" ) as! String?
-        self.notes = decoder.decodeObjectForKey( "notes" ) as! String?
+        self.name = decoder.decodeObjectForKey( "ingredientName" ) as! String
+        self.quantity = decoder.decodeObjectForKey( "ingredientQuantity" ) as! Double?
+        self.unit = unitEnum(rawValue: decoder.decodeObjectForKey("ingredientUnit" ) as! String )
+        self.preparation = decoder.decodeObjectForKey( "ingredientPreparation" ) as! String?
+        self.notes = decoder.decodeObjectForKey( "ingredientNotes" ) as! String?
     }
     
     enum unitEnum : String {

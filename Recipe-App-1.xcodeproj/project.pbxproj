@@ -77,8 +77,8 @@
 			children = (
 				E370F1641B4C32BD004F0D2A /* Recipe.swift */,
 				E370F1681B4C3498004F0D2A /* Instruction.swift */,
-				E370F1661B4C32FA004F0D2A /* Ingredient.swift */,
 				E36561431B5BFF55007CC9ED /* IngredientGroup.swift */,
+				E370F1661B4C32FA004F0D2A /* Ingredient.swift */,
 				E370F16E1B4C49E2004F0D2A /* Category.swift */,
 			);
 			name = Model;

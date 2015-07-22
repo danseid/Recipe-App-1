@@ -24,13 +24,13 @@ class Instruction: NSObject, NSCoding {
     }
     
     func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(self.text, forKey: "text")
-        coder.encodeObject(self.step, forKey: "step")
+        coder.encodeObject(self.text, forKey: "instructionText")
+        coder.encodeObject(self.step, forKey: "instructionStep")
     }
     
     required convenience init(coder decoder: NSCoder) {
         self.init()
-        self.text = decoder.decodeObjectForKey( "text" ) as! String
-        self.step = decoder.decodeObjectForKey( "step" ) as! Int
+        self.text = decoder.decodeObjectForKey( "instructionText" ) as! String
+        self.step = decoder.decodeObjectForKey( "instructionStep" ) as! Int
     }
 }

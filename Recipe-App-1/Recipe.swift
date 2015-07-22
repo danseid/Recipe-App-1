@@ -12,7 +12,6 @@ class Recipe: NSObject, NSCoding {
     
     var name: String
     var rating: Double?
-    var ingredients: [IngredientGroup: [Ingredient]]
     var ingredientGroups: [IngredientGroup]
     var instructions: [Instruction]
     var categories: [Category]
@@ -21,18 +20,16 @@ class Recipe: NSObject, NSCoding {
     override init() {
         self.name = String()
         self.rating = 0.0
-        self.ingredients = [IngredientGroup: [Ingredient]]()
         self.ingredientGroups = [IngredientGroup]()
         self.instructions = [Instruction]()
         self.categories = [Category]()
         self.image = NSImage()
     }
     
-    init(name: String, rating: Double?, ingredients: [IngredientGroup: [Ingredient]], instructions: [Instruction], categories: [Category], image: NSImage?) {
+    init(name: String, rating: Double?, ingredientGroups: [IngredientGroup], instructions: [Instruction], categories: [Category], image: NSImage?) {
         self.name = name
         self.rating = rating
-        self.ingredients = ingredients
-        self.ingredientGroups = ingredients.keys.array.reverse()
+        self.ingredientGroups = ingredientGroups
         self.instructions = instructions
         self.categories = categories
         self.image = image
@@ -47,24 +44,22 @@ class Recipe: NSObject, NSCoding {
     }
 
     func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(self.name, forKey: "name")
-        coder.encodeObject(self.rating, forKey: "rating")
-        coder.encodeObject(self.ingredients, forKey: "ingredients")
-        coder.encodeObject(self.ingredientGroups, forKey: "ingredientGroups")
-        coder.encodeObject(self.instructions, forKey: "instructions")
-        coder.encodeObject(self.categories, forKey: "categories")
-        coder.encodeObject(self.image, forKey: "image")
+        coder.encodeObject(self.name, forKey: "recipeName")
+        coder.encodeObject(self.rating, forKey: "recipeRating")
+        coder.encodeObject(self.ingredientGroups, forKey: "recipeIngredientGroups")
+        coder.encodeObject(self.instructions, forKey: "recipeInstructions")
+        coder.encodeObject(self.categories, forKey: "recipeCategories")
+        coder.encodeObject(self.image, forKey: "recipeImage")
     }
     
     required convenience init(coder decoder: NSCoder) {
         self.init()
-        self.name = decoder.decodeObjectForKey( "name" ) as! String
-        self.rating = decoder.decodeObjectForKey( "rating" ) as! Double?
-        self.ingredients = decoder.decodeObjectForKey( "ingredients" ) as! [IngredientGroup:[Ingredient]]
-        self.ingredientGroups = decoder.decodeObjectForKey("ingredientGroups") as! [IngredientGroup]
-        self.instructions = decoder.decodeObjectForKey( "instructions" ) as! [Instruction]
-        self.categories = decoder.decodeObjectForKey( "categories" ) as! [Category]
-        self.image = decoder.decodeObjectForKey( "image" ) as! NSImage?
+        self.name = decoder.decodeObjectForKey( "recipeName" ) as! String
+        self.rating = decoder.decodeObjectForKey( "recipeRating" ) as! Double?
+        self.ingredientGroups = decoder.decodeObjectForKey("recipeIngredientGroups") as! [IngredientGroup]
+        self.instructions = decoder.decodeObjectForKey( "recipeInstructions" ) as! [Instruction]
+        self.categories = decoder.decodeObjectForKey( "recipeCategories" ) as! [Category]
+        self.image = decoder.decodeObjectForKey( "recipeImage" ) as! NSImage?
     }
 }
 

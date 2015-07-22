@@ -38,17 +38,17 @@ class Category: NSObject, NSCoding {
     }
     
     func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(self.name, forKey: "name")
-        coder.encodeObject(self.desc, forKey: "desc")
-        coder.encodeObject(self.recipes, forKey: "recipes")
-        coder.encodeObject(self.icon, forKey: "icon")
+        coder.encodeObject(self.name, forKey: "categoryName")
+        coder.encodeObject(self.desc, forKey: "categoryDesc")
+        coder.encodeObject(self.recipes, forKey: "categoryRecipes")
+        coder.encodeObject(self.icon, forKey: "categoryIcon")
     }
     
     required convenience init(coder decoder: NSCoder) {
         self.init()
-        self.name = decoder.decodeObjectForKey( "name" ) as! String
-        self.desc = decoder.decodeObjectForKey( "desc" ) as! String?
-        self.recipes = decoder.decodeObjectForKey( "recipes" ) as! [Recipe]
-        self.icon = decoder.decodeObjectForKey( "icon" ) as! NSImage?
+        self.name = decoder.decodeObjectForKey( "categoryName" ) as! String
+        self.desc = decoder.decodeObjectForKey( "categoryDesc" ) as! String?
+        self.recipes = decoder.decodeObjectForKey( "categoryRecipes" ) as! [Recipe]
+        self.icon = decoder.decodeObjectForKey( "categoryIcon" ) as! NSImage?
     }
 }
