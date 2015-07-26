@@ -135,7 +135,9 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ingredientsPopover" {
-            let destination: IngredientsPopover = segue.destinationController as! IngredientsPopover
+            if let destination = segue.destinationController as? IngredientsPopover {
+                destination.ingredients = self.recipe.ingredients
+            }
         }
     }
 }
