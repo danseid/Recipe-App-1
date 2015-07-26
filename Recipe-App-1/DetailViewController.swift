@@ -69,7 +69,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
                 return ingredients[index]
             }
         }
-        return self.recipe.ingredientGroups[index] as IngredientGroup
+        return self.recipe.ingredients[index]
     }
     
     func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
@@ -84,19 +84,20 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         }
     }
     
-//    func outlineView(outlineView: NSOutlineView, isItemExpanded item: AnyObject) -> Bool {
-//        if let it = item as? IngredientGroup {
-//            return it.isExpanded
-//        }
-//        return false
-//    }
-    
     func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
         if let it = item as? IngredientGroup {
             return it.ingredients.count
         }
-        return self.recipe.ingredientGroups.count
+        return self.recipe.ingredients.count
     }
+    
+//    func outlineView(outlineView: NSOutlineView, isGroupItem item: AnyObject) -> Bool {
+//        if let it = item as? IngredientGroup {
+//            return false
+//        }
+//        return true
+//    }
+
 
     // Function to implement the NSOutlineView Delegate
     

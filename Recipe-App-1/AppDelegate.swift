@@ -16,13 +16,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
         
+        // For debugging/convenience only:
+        
 //        self.sidebarViewController.setupNewRecipesCategory()
 //        self.sidebarViewController.setupSampleRecipes()
-//        NSUserDefaults.standardUserDefaults().removeObjectForKey("recipes")
-//        NSUserDefaults.standardUserDefaults().removeObjectForKey("categories")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("recipes")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("categories")
         
-        //println(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())
-
+        // End of debugging code.
         
         if let recipes = NSUserDefaults.standardUserDefaults().objectForKey("recipes") as? NSData {
             if let unarchived = NSKeyedUnarchiver.unarchiveObjectWithData(recipes) as? [Recipe] {

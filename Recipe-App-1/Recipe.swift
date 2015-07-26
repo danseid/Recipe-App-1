@@ -12,7 +12,7 @@ class Recipe: NSObject, NSCoding {
     
     var name: String
     var rating: Double?
-    var ingredientGroups: [IngredientGroup]
+    var ingredients: [AnyObject]
     var instructions: [Instruction]
     var categories: [Category]
     var image: NSImage?
@@ -20,16 +20,16 @@ class Recipe: NSObject, NSCoding {
     override init() {
         self.name = String()
         self.rating = 0.0
-        self.ingredientGroups = [IngredientGroup]()
+        self.ingredients = [AnyObject]()
         self.instructions = [Instruction]()
         self.categories = [Category]()
         self.image = NSImage()
     }
     
-    init(name: String, rating: Double?, ingredientGroups: [IngredientGroup], instructions: [Instruction], categories: [Category], image: NSImage?) {
+    init(name: String, rating: Double?, ingredients: [AnyObject], instructions: [Instruction], categories: [Category], image: NSImage?) {
         self.name = name
         self.rating = rating
-        self.ingredientGroups = ingredientGroups
+        self.ingredients = ingredients
         self.instructions = instructions
         self.categories = categories
         self.image = image
@@ -46,7 +46,7 @@ class Recipe: NSObject, NSCoding {
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.name, forKey: "recipeName")
         coder.encodeObject(self.rating, forKey: "recipeRating")
-        coder.encodeObject(self.ingredientGroups, forKey: "recipeIngredientGroups")
+        coder.encodeObject(self.ingredients, forKey: "recipeIngredients")
         coder.encodeObject(self.instructions, forKey: "recipeInstructions")
         coder.encodeObject(self.categories, forKey: "recipeCategories")
         coder.encodeObject(self.image, forKey: "recipeImage")
@@ -56,7 +56,7 @@ class Recipe: NSObject, NSCoding {
         self.init()
         self.name = decoder.decodeObjectForKey( "recipeName" ) as! String
         self.rating = decoder.decodeObjectForKey( "recipeRating" ) as! Double?
-        self.ingredientGroups = decoder.decodeObjectForKey("recipeIngredientGroups") as! [IngredientGroup]
+        self.ingredients = decoder.decodeObjectForKey("recipeIngredients") as! [AnyObject]
         self.instructions = decoder.decodeObjectForKey( "recipeInstructions" ) as! [Instruction]
         self.categories = decoder.decodeObjectForKey( "recipeCategories" ) as! [Category]
         self.image = decoder.decodeObjectForKey( "recipeImage" ) as! NSImage?

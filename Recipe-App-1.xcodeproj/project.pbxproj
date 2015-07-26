@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		E36561421B580FE6007CC9ED /* IngredientsPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36561411B580FE6007CC9ED /* IngredientsPopover.swift */; };
 		E36561441B5BFF55007CC9ED /* IngredientGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36561431B5BFF55007CC9ED /* IngredientGroup.swift */; };
+		E36561461B629087007CC9ED /* CategoryOverviewTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36561451B629087007CC9ED /* CategoryOverviewTabViewController.swift */; };
+		E365614A1B6294AA007CC9ED /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36561491B6294AA007CC9ED /* CategoryCollectionViewController.swift */; };
+		E36561501B6294E7007CC9ED /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E365614F1B6294E7007CC9ED /* CategoryTableViewController.swift */; };
 		E370F15F1B4C318F004F0D2A /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370F15E1B4C318F004F0D2A /* SidebarViewController.swift */; };
 		E370F1651B4C32BD004F0D2A /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370F1641B4C32BD004F0D2A /* Recipe.swift */; };
 		E370F1671B4C32FA004F0D2A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E370F1661B4C32FA004F0D2A /* Ingredient.swift */; };
@@ -36,6 +39,9 @@
 /* Begin PBXFileReference section */
 		E36561411B580FE6007CC9ED /* IngredientsPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsPopover.swift; sourceTree = "<group>"; };
 		E36561431B5BFF55007CC9ED /* IngredientGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientGroup.swift; sourceTree = "<group>"; };
+		E36561451B629087007CC9ED /* CategoryOverviewTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryOverviewTabViewController.swift; sourceTree = "<group>"; };
+		E36561491B6294AA007CC9ED /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
+		E365614F1B6294E7007CC9ED /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		E370F15E1B4C318F004F0D2A /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E370F1641B4C32BD004F0D2A /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		E370F1661B4C32FA004F0D2A /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
@@ -72,6 +78,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E36561471B629438007CC9ED /* CategoryOverView */ = {
+			isa = PBXGroup;
+			children = (
+				E36561451B629087007CC9ED /* CategoryOverviewTabViewController.swift */,
+				E36561491B6294AA007CC9ED /* CategoryCollectionViewController.swift */,
+				E365614F1B6294E7007CC9ED /* CategoryTableViewController.swift */,
+			);
+			name = CategoryOverView;
+			sourceTree = "<group>";
+		};
+		E36561481B629455007CC9ED /* RecipeDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				E370F16A1B4C36C9004F0D2A /* DetailViewController.swift */,
+				E36561411B580FE6007CC9ED /* IngredientsPopover.swift */,
+			);
+			name = RecipeDetailView;
+			sourceTree = "<group>";
+		};
 		E370F1621B4C3249004F0D2A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,9 +116,9 @@
 				E3AD7FB91B4EE79000A277A8 /* WindowController.swift */,
 				E370F16C1B4C38E4004F0D2A /* SplitViewController.swift */,
 				E370F15E1B4C318F004F0D2A /* SidebarViewController.swift */,
-				E370F16A1B4C36C9004F0D2A /* DetailViewController.swift */,
-				E36561411B580FE6007CC9ED /* IngredientsPopover.swift */,
 				E371B6D31B4AD15C007EB63B /* Main.storyboard */,
+				E36561481B629455007CC9ED /* RecipeDetailView */,
+				E36561471B629438007CC9ED /* CategoryOverView */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -257,9 +282,12 @@
 				E371B6CE1B4AD15C007EB63B /* AppDelegate.swift in Sources */,
 				E3AD7FBA1B4EE79000A277A8 /* WindowController.swift in Sources */,
 				E370F16B1B4C36C9004F0D2A /* DetailViewController.swift in Sources */,
+				E365614A1B6294AA007CC9ED /* CategoryCollectionViewController.swift in Sources */,
+				E36561501B6294E7007CC9ED /* CategoryTableViewController.swift in Sources */,
 				E36561421B580FE6007CC9ED /* IngredientsPopover.swift in Sources */,
 				E370F15F1B4C318F004F0D2A /* SidebarViewController.swift in Sources */,
 				E370F1651B4C32BD004F0D2A /* Recipe.swift in Sources */,
+				E36561461B629087007CC9ED /* CategoryOverviewTabViewController.swift in Sources */,
 				E370F16F1B4C49E2004F0D2A /* Category.swift in Sources */,
 				E36561441B5BFF55007CC9ED /* IngredientGroup.swift in Sources */,
 			);
