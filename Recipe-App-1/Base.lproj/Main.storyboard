@@ -674,9 +674,26 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="EE13F670-A0E3-4EFE-B45E-72E9FC873673" label="Custom View" paletteLabel="Custom View" id="wtx-xG-VL0">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="67" height="28"/>
+                                    <size key="maxSize" width="100" height="28"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="nOz-Xw-r8E">
+                                        <rect key="frame" x="0.0" y="14" width="67" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="wTR-pn-1bU">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment image="NSIconViewTemplate" width="32"/>
+                                                <segment image="NSListViewTemplate" width="32" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="yRI-f9-sPv"/>
+                                <toolbarItem reference="wtx-xG-VL0"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
@@ -694,8 +711,7 @@
                 <splitViewController id="cO0-jx-Uxd" customClass="SplitViewController" customModule="Recipe_App_1" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="280" id="129-xe-gpa"/>
-                        <splitViewItem canCollapse="YES" holdingPriority="150" id="PA6-4W-4oR"/>
-                        <splitViewItem canCollapse="YES" id="rlu-jY-mXJ"/>
+                        <splitViewItem id="rlu-jY-mXJ"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="aTp-pd-edn">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -706,18 +722,17 @@
                     </splitView>
                     <connections>
                         <outlet property="categoryOverView" destination="rlu-jY-mXJ" id="UlV-La-flz"/>
-                        <outlet property="detailSubView" destination="PA6-4W-4oR" id="ikj-oP-rva"/>
+                        <outlet property="detailSubView" destination="rlu-jY-mXJ" id="CRk-6K-Tcc"/>
                         <outlet property="mainSplitView" destination="aTp-pd-edn" id="p6f-Xf-cdq"/>
                         <outlet property="sidebarSubView" destination="129-xe-gpa" id="sPc-6A-PpU"/>
                         <outlet property="view" destination="aTp-pd-edn" id="0Tm-Wz-EPh"/>
                         <segue destination="3zW-FO-qNw" kind="relationship" relationship="splitItems" id="YUP-yF-WYt"/>
-                        <segue destination="7Bq-tt-Ypa" kind="relationship" relationship="splitItems" id="MPO-6k-0Ie"/>
                         <segue destination="Ah8-QJ-v6B" kind="relationship" relationship="splitItems" id="1ct-gE-bnh"/>
                     </connections>
                 </splitViewController>
                 <customObject id="ffA-FU-IKJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="673"/>
+            <point key="canvasLocation" x="-300" y="813"/>
         </scene>
         <!--Sidebar View Controller-->
         <scene sceneID="tfh-SZ-vuX">
@@ -862,7 +877,7 @@
                 </viewController>
                 <customObject id="2DD-2w-N4F" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="567" y="191"/>
+            <point key="canvasLocation" x="117" y="609"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="aGM-O9-ED1">
@@ -1071,7 +1086,7 @@
                 </viewController>
                 <customObject id="BPJ-oV-NJf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="673"/>
+            <point key="canvasLocation" x="833" y="629"/>
         </scene>
         <!--Ingredients Popover-->
         <scene sceneID="nHQ-4l-Vlw">
@@ -1084,30 +1099,32 @@
                 </viewController>
                 <customObject id="SL7-4v-bqE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="1105"/>
+            <point key="canvasLocation" x="1411" y="629"/>
         </scene>
         <!--Category Overview Tab View Controller-->
         <scene sceneID="4v2-va-IhI">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" id="Ah8-QJ-v6B" customClass="CategoryOverviewTabViewController" customModule="Recipe_App_1" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="Ah8-QJ-v6B" customClass="CategoryOverviewTabViewController" customModule="Recipe_App_1" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
+                        <tabViewItem id="7S3-Ax-8mc"/>
                         <tabViewItem identifier="" id="Fy1-zh-lny"/>
                         <tabViewItem identifier="" id="RSm-zN-Zf6"/>
                     </tabViewItems>
-                    <tabView key="tabView" type="noTabsNoBorder" id="evE-vP-CbE">
+                    <tabView key="tabView" id="evE-vP-CbE">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
                         <tabViewItems/>
                     </tabView>
                     <connections>
+                        <segue destination="7Bq-tt-Ypa" kind="relationship" relationship="tabItems" id="iRy-eE-Q18"/>
                         <segue destination="iSs-ku-2vX" kind="relationship" relationship="tabItems" id="eQP-yJ-aDF"/>
                         <segue destination="N0B-xC-byb" kind="relationship" relationship="tabItems" id="xXr-pz-Hpq"/>
                     </connections>
                 </tabViewController>
                 <customObject id="Ebn-dV-wM5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="1505"/>
+            <point key="canvasLocation" x="267" y="1005"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="fZV-Gw-Wah">
@@ -1150,7 +1167,7 @@
                 </viewController>
                 <customObject id="JYk-dl-qfv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="1505"/>
+            <point key="canvasLocation" x="869" y="1005"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="IWe-DD-ir2">
@@ -1163,7 +1180,7 @@
                 </viewController>
                 <customObject id="ZH2-gR-XVY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="1949"/>
+            <point key="canvasLocation" x="869" y="1453"/>
         </scene>
         <!--Collection View Item-->
         <scene sceneID="jqx-FP-8Ot">
@@ -1176,13 +1193,15 @@
                 </collectionViewItem>
                 <customObject id="6FT-oB-rhv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1019" y="1405"/>
+            <point key="canvasLocation" x="1169" y="905"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSHomeTemplate" width="14" height="14"/>
+        <image name="NSIconViewTemplate" width="10" height="10"/>
+        <image name="NSListViewTemplate" width="14" height="10"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

@@ -176,12 +176,9 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
                 if let detailView = splitView.childViewControllers[1] as? DetailViewController { // Send object details to Detail VC
                     detailView.displayRecipe = self.displayRecipe
                 }
-                splitView.displayRecipeDetailView()
             }
         } else if (object is Category) {
-            if let splitView = self.parentViewController as? SplitViewController {
-                splitView.displayCategoryOverView()
-            }
+
         }
         
         if object != nil {
