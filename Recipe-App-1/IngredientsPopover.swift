@@ -8,11 +8,18 @@
 
 import Cocoa
 
-class IngredientsPopover: NSViewController {
+class IngredientsPopover: NSViewController { //, NSTableViewDelegate, NSTableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
     
+    
+    //func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    //    return 0;
+    //}
+    
+    //func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    //}
 }
