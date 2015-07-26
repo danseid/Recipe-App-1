@@ -9,6 +9,7 @@
 import Cocoa
 
 class WindowController: NSWindowController {
+    @IBOutlet weak var categoryViewSelector: NSSegmentedControl!
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -24,6 +25,16 @@ class WindowController: NSWindowController {
             NSAnimationContext.runAnimationGroup({ context in  // Animates the collapse/uncollapse
                 self.splitViewController.sidebarSubView.animator().collapsed = !sidebarState
             }, completionHandler: nil)
+        }
+    }
+    
+    @IBAction func toolbarCategoryViewButtonActive(sender: AnyObject) {
+        if let detailTabView = self.splitViewController.detailSubView.viewController as? DetailTabViewController {
+            if detailTabView.selectedTabViewItemIndex == 1 {
+                detailTabView.selectedTabViewItemIndex = 2
+            } else if detailTabView.selectedTabViewItemIndex == 2 {
+                detailTabView.selectedTabViewItemIndex = 1
+            }
         }
     }
 }

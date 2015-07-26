@@ -674,13 +674,34 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="EE13F670-A0E3-4EFE-B45E-72E9FC873673" label="Custom View" paletteLabel="Custom View" id="wtx-xG-VL0">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="67" height="25"/>
+                                    <size key="maxSize" width="100" height="28"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="nOz-Xw-r8E">
+                                        <rect key="frame" x="5" y="14" width="67" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="wTR-pn-1bU">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment image="NSIconViewTemplate" width="32" selected="YES"/>
+                                                <segment image="NSListViewTemplate" width="32" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="toolbarCategoryViewButtonActive:" target="B8D-0N-5wS" id="BFy-N7-Jfb"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="yRI-f9-sPv"/>
+                                <toolbarItem reference="wtx-xG-VL0"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
                     <connections>
+                        <outlet property="categoryViewSelector" destination="nOz-Xw-r8E" id="Cwr-vt-UbD"/>
                         <segue destination="cO0-jx-Uxd" kind="relationship" relationship="window.shadowedContentViewController" id="orn-As-JLT"/>
                     </connections>
                 </windowController>
@@ -694,30 +715,27 @@
                 <splitViewController id="cO0-jx-Uxd" customClass="SplitViewController" customModule="Recipe_App_1" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="280" id="129-xe-gpa"/>
-                        <splitViewItem canCollapse="YES" holdingPriority="150" id="PA6-4W-4oR"/>
-                        <splitViewItem canCollapse="YES" id="rlu-jY-mXJ"/>
+                        <splitViewItem id="rlu-jY-mXJ"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="aTp-pd-edn">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <outlet property="delegate" destination="cO0-jx-Uxd" id="FNC-uk-rMW"/>
                         </connections>
                     </splitView>
                     <connections>
-                        <outlet property="categoryOverView" destination="rlu-jY-mXJ" id="UlV-La-flz"/>
-                        <outlet property="detailSubView" destination="PA6-4W-4oR" id="ikj-oP-rva"/>
+                        <outlet property="detailSubView" destination="rlu-jY-mXJ" id="CRk-6K-Tcc"/>
                         <outlet property="mainSplitView" destination="aTp-pd-edn" id="p6f-Xf-cdq"/>
                         <outlet property="sidebarSubView" destination="129-xe-gpa" id="sPc-6A-PpU"/>
                         <outlet property="view" destination="aTp-pd-edn" id="0Tm-Wz-EPh"/>
                         <segue destination="3zW-FO-qNw" kind="relationship" relationship="splitItems" id="YUP-yF-WYt"/>
-                        <segue destination="7Bq-tt-Ypa" kind="relationship" relationship="splitItems" id="MPO-6k-0Ie"/>
                         <segue destination="Ah8-QJ-v6B" kind="relationship" relationship="splitItems" id="1ct-gE-bnh"/>
                     </connections>
                 </splitViewController>
                 <customObject id="ffA-FU-IKJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="673"/>
+            <point key="canvasLocation" x="-375" y="816"/>
         </scene>
         <!--Sidebar View Controller-->
         <scene sceneID="tfh-SZ-vuX">
@@ -862,7 +880,7 @@
                 </viewController>
                 <customObject id="2DD-2w-N4F" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="567" y="191"/>
+            <point key="canvasLocation" x="117" y="609"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="aGM-O9-ED1">
@@ -1063,15 +1081,16 @@
                     </view>
                     <connections>
                         <outlet property="dropImageLabel" destination="w1W-5W-PsI" id="xJD-zI-1RR"/>
+                        <outlet property="recipeDetailSplitView" destination="tU3-rI-w4z" id="uxd-gU-nEQ"/>
                         <outlet property="recipeImageWell" destination="Zzs-k1-qPe" id="ESA-Uk-maf"/>
                         <outlet property="recipeIngredientsOutlineView" destination="hjW-dP-p6e" id="GJm-S5-ruD"/>
                         <outlet property="recipeTextField" destination="tJn-HF-dOi" id="ogt-rA-JTS"/>
-                        <segue destination="v21-TU-LeD" kind="popover" identifier="ingredientPopover" popoverBehavior="t" preferredEdge="maxX" id="baH-gE-ldA"/>
+                        <segue destination="v21-TU-LeD" kind="popover" identifier="ingredientsPopover" popoverBehavior="t" preferredEdge="maxX" id="baH-gE-ldA"/>
                     </connections>
                 </viewController>
                 <customObject id="BPJ-oV-NJf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="673"/>
+            <point key="canvasLocation" x="833" y="629"/>
         </scene>
         <!--Ingredients Popover-->
         <scene sceneID="nHQ-4l-Vlw">
@@ -1252,11 +1271,12 @@
             </objects>
             <point key="canvasLocation" x="717" y="1115"/>
         </scene>
-        <!--Category Overview Tab View Controller-->
+        <!--Detail Tab View Controller-->
         <scene sceneID="4v2-va-IhI">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" id="Ah8-QJ-v6B" customClass="CategoryOverviewTabViewController" customModule="Recipe_App_1" customModuleProvider="target" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="unspecified" id="Ah8-QJ-v6B" customClass="DetailTabViewController" customModule="Recipe_App_1" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
+                        <tabViewItem id="7S3-Ax-8mc"/>
                         <tabViewItem identifier="" id="Fy1-zh-lny"/>
                         <tabViewItem identifier="" id="RSm-zN-Zf6"/>
                     </tabViewItems>
@@ -1267,18 +1287,22 @@
                         <tabViewItems/>
                     </tabView>
                     <connections>
+                        <outlet property="categoryCollectionTab" destination="Fy1-zh-lny" id="CVj-hV-Sgo"/>
+                        <outlet property="categoryDetailTab" destination="RSm-zN-Zf6" id="Xau-pA-rSz"/>
+                        <outlet property="recipeDetailTab" destination="7S3-Ax-8mc" id="eiM-JW-qLm"/>
+                        <segue destination="7Bq-tt-Ypa" kind="relationship" relationship="tabItems" id="iRy-eE-Q18"/>
                         <segue destination="iSs-ku-2vX" kind="relationship" relationship="tabItems" id="eQP-yJ-aDF"/>
                         <segue destination="N0B-xC-byb" kind="relationship" relationship="tabItems" id="xXr-pz-Hpq"/>
                     </connections>
                 </tabViewController>
                 <customObject id="Ebn-dV-wM5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="1505"/>
+            <point key="canvasLocation" x="267" y="1005"/>
         </scene>
-        <!--View Controller-->
+        <!--Category Collection View Controller-->
         <scene sceneID="fZV-Gw-Wah">
             <objects>
-                <viewController id="iSs-ku-2vX" sceneMemberID="viewController">
+                <viewController id="iSs-ku-2vX" customClass="CategoryCollectionViewController" customModule="Recipe_App_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="gbM-ee-ufX">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1293,6 +1317,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="iSs-ku-2vX" id="DMH-mK-Hx1"/>
+                                            </connections>
                                         </collectionView>
                                     </subviews>
                                 </clipView>
@@ -1316,12 +1343,12 @@
                 </viewController>
                 <customObject id="JYk-dl-qfv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="1505"/>
+            <point key="canvasLocation" x="869" y="1005"/>
         </scene>
-        <!--View Controller-->
+        <!--Category Table View Controller-->
         <scene sceneID="IWe-DD-ir2">
             <objects>
-                <viewController id="N0B-xC-byb" sceneMemberID="viewController">
+                <viewController id="N0B-xC-byb" customClass="CategoryTableViewController" customModule="Recipe_App_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="xek-qH-JlP">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1329,7 +1356,7 @@
                 </viewController>
                 <customObject id="ZH2-gR-XVY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="1949"/>
+            <point key="canvasLocation" x="869" y="1448"/>
         </scene>
         <!--Collection View Item-->
         <scene sceneID="jqx-FP-8Ot">
@@ -1342,13 +1369,15 @@
                 </collectionViewItem>
                 <customObject id="6FT-oB-rhv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1019" y="1405"/>
+            <point key="canvasLocation" x="1169" y="905"/>
         </scene>
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSHomeTemplate" width="14" height="14"/>
+        <image name="NSIconViewTemplate" width="10" height="10"/>
+        <image name="NSListViewTemplate" width="14" height="10"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>
