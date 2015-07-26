@@ -93,8 +93,10 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
         self.sidebarOutlineView.selectRowIndexes(NSIndexSet(index: newRowIndex), byExtendingSelection: false) // Select to display in DetailView
         self.sidebarOutlineView.scrollRowToVisible(newRowIndex)  // Scroll OutlineView to display the correct row
         
-        if let detailView = self.parentViewController!.childViewControllers[1] as? DetailViewController {
-            detailView.recipeTextField.becomeFirstResponder()
+        if let detailTabView = self.parentViewController!.childViewControllers[1] as? DetailTabViewController {
+            if let detailView = detailTabView.recipeDetailTab.viewController as? DetailViewController {
+                detailView.recipeTextField.becomeFirstResponder()
+            }
         }
     }
     
@@ -169,16 +171,17 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
     func outlineViewSelectionDidChange(notification: NSNotification){  // Retrieve selected object from OutlineView
         var selectedIndex = notification.object?.selectedRow
         var object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
+        let detailTabView = self.parentViewController?.childViewControllers[1] as! DetailTabViewController
+        let categoryViewButton = self.parentViewController
         
         if (object is Recipe){
             self.displayRecipe = (object as! Recipe)
-            if let splitView = self.parentViewController as? SplitViewController {
-                if let detailView = splitView.childViewControllers[1] as? DetailViewController { // Send object details to Detail VC
-                    detailView.displayRecipe = self.displayRecipe
-                }
+            if let recipeDetailTab = detailTabView.recipeDetailTab.viewController as? DetailViewController {
+                recipeDetailTab.displayRecipe = self.displayRecipe
             }
+            detailTabView.displayRecipeDetail()
         } else if (object is Category) {
-
+            detailTabView.displayCategoryCollection()
         }
         
         if object != nil {

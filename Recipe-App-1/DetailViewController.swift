@@ -14,6 +14,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     @IBOutlet weak var recipeTextField: NSTextField!
     @IBOutlet weak var recipeIngredientsOutlineView: NSOutlineView!
     @IBOutlet weak var dropImageLabel: NSTextField!
+    @IBOutlet weak var recipeDetailSplitView: NSSplitView!
     
     var recipe = Recipe()
         
@@ -21,6 +22,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         super.viewDidLoad()
         //self.recipeIngredientsOutlineView.headerView.
         // Do view setup here.
+        //self.recipeDetailSplitView
     }
     
     var displayRecipe: Recipe? {
@@ -121,13 +123,18 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     }
     
     func outlineViewSelectionDidChange(notification: NSNotification){  // Retrieve selected object from OutlineView
-//        var selectedIndex = notification.object?.selectedRow
-//        var object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
+        var selectedIndex = notification.object?.selectedRow
+        var object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
+        
+        if object is Ingredient {
+            println("Here")
+            self.performSegueWithIdentifier("ingredientsPopover", sender: self)
+        }
 
     }
     
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ingredientPopover" {
+        if segue.identifier == "ingredientsPopover" {
             let destination: IngredientsPopover = segue.destinationController as! IngredientsPopover
         }
     }

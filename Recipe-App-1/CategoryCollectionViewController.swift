@@ -8,11 +8,12 @@
 
 import Cocoa
 
-class CategoryCollectionViewController: NSViewController {
+class CategoryCollectionViewController: NSViewController, NSCollectionViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
     
+
 }
