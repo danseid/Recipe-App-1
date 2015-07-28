@@ -1085,7 +1085,7 @@
                         <outlet property="recipeImageWell" destination="Zzs-k1-qPe" id="ESA-Uk-maf"/>
                         <outlet property="recipeIngredientsOutlineView" destination="hjW-dP-p6e" id="GJm-S5-ruD"/>
                         <outlet property="recipeTextField" destination="tJn-HF-dOi" id="ogt-rA-JTS"/>
-                        <segue destination="v21-TU-LeD" kind="popover" identifier="ingredientsPopover" popoverBehavior="t" preferredEdge="maxX" id="baH-gE-ldA"/>
+                        <segue destination="v21-TU-LeD" kind="popover" identifier="ingredientsPopover" popoverAnchorView="4v2-lB-COV" popoverBehavior="t" preferredEdge="maxX" id="baH-gE-ldA"/>
                     </connections>
                 </viewController>
                 <customObject id="BPJ-oV-NJf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1100,9 +1100,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agD-KI-cWg">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                                <clipView key="contentView" misplaced="YES" id="CQ0-En-ZoM">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agD-KI-cWg">
+                                <rect key="frame" x="0.0" y="34" width="450" height="246"/>
+                                <clipView key="contentView" id="CQ0-En-ZoM">
                                     <rect key="frame" x="1" y="17" width="238" height="117"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -1136,7 +1136,7 @@
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Oa1-tz-aHR">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
@@ -1168,7 +1168,7 @@
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="IXW-db-1H5">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
@@ -1200,7 +1200,7 @@
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="RQW-LJ-pAb">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
@@ -1232,7 +1232,7 @@
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="RMC-Gu-h7T">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
@@ -1264,7 +1264,32 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jvz-EX-GLB">
+                                <rect key="frame" x="169" y="283" width="113" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Ingredients Editor" id="g5q-OH-ir9">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rro-ET-eJK">
+                                <rect key="frame" x="366" y="0.0" width="82" height="32"/>
+                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ApI-tr-3D0">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="agD-KI-cWg" firstAttribute="top" secondItem="Jvz-EX-GLB" secondAttribute="bottom" constant="3" id="5Sa-g9-c0B"/>
+                            <constraint firstAttribute="trailing" secondItem="Rro-ET-eJK" secondAttribute="trailing" constant="8" id="DYj-zy-cbc"/>
+                            <constraint firstAttribute="centerX" secondItem="Jvz-EX-GLB" secondAttribute="centerX" id="RfL-8X-g5n"/>
+                            <constraint firstItem="Jvz-EX-GLB" firstAttribute="top" secondItem="WtO-gV-5Fg" secondAttribute="top" id="T5D-Vq-TYy"/>
+                            <constraint firstItem="agD-KI-cWg" firstAttribute="leading" secondItem="WtO-gV-5Fg" secondAttribute="leading" id="WdX-T5-VZW"/>
+                            <constraint firstItem="Rro-ET-eJK" firstAttribute="top" secondItem="agD-KI-cWg" secondAttribute="bottom" constant="6" id="h3d-DF-LoC"/>
+                            <constraint firstAttribute="trailing" secondItem="agD-KI-cWg" secondAttribute="trailing" id="qZs-fX-F6y"/>
+                            <constraint firstAttribute="bottom" secondItem="Rro-ET-eJK" secondAttribute="bottom" constant="7" id="uUa-EM-Mvg"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="SL7-4v-bqE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1313,11 +1338,12 @@
                                     <rect key="frame" x="1" y="1" width="248" height="158"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView id="6bL-kl-V9S">
+                                        <collectionView selectable="YES" id="6bL-kl-V9S">
                                             <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <connections>
+                                                <binding destination="Ccf-Oj-lga" name="content" keyPath="arrangedObjects" id="gB5-Sq-IGY"/>
                                                 <outlet property="delegate" destination="iSs-ku-2vX" id="DMH-mK-Hx1"/>
                                             </connections>
                                         </collectionView>
@@ -1340,8 +1366,21 @@
                             <constraint firstItem="fbK-hE-usd" firstAttribute="top" secondItem="gbM-ee-ufX" secondAttribute="top" id="yGh-c4-PKe"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="categoryCollectionView" destination="6bL-kl-V9S" id="IOK-oW-azo"/>
+                        <outlet property="categoryCollectionViewArray" destination="Ccf-Oj-lga" id="gtr-m7-HUp"/>
+                    </connections>
                 </viewController>
                 <customObject id="JYk-dl-qfv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <arrayController objectClassName="Recipe" id="Ccf-Oj-lga">
+                    <declaredKeys>
+                        <string>image</string>
+                    </declaredKeys>
+                    <connections>
+                        <binding destination="iSs-ku-2vX" name="contentArray" keyPath="displayImages" id="p40-Xb-X3y"/>
+                        <outlet property="content" destination="iSs-ku-2vX" id="Y0h-Ys-IIR"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="869" y="1005"/>
         </scene>
@@ -1361,15 +1400,30 @@
         <!--Collection View Item-->
         <scene sceneID="jqx-FP-8Ot">
             <objects>
-                <collectionViewItem id="xXP-Ek-UXZ" sceneMemberID="viewController">
+                <collectionViewItem storyboardIdentifier="categoryCollectionViewItem" id="xXP-Ek-UXZ" sceneMemberID="viewController">
                     <view key="view" id="7vl-Lq-u5A">
-                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="140"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xdQ-sk-FR0">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="140"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="JFy-2Y-BGz"/>
+                                <connections>
+                                    <binding destination="xXP-Ek-UXZ" name="value" keyPath="representedObject.image" id="8V2-cr-PEr"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xdQ-sk-FR0" secondAttribute="trailing" id="MAq-Th-kqA"/>
+                            <constraint firstItem="xdQ-sk-FR0" firstAttribute="top" secondItem="7vl-Lq-u5A" secondAttribute="top" id="QoY-wT-JQL"/>
+                            <constraint firstItem="xdQ-sk-FR0" firstAttribute="leading" secondItem="7vl-Lq-u5A" secondAttribute="leading" id="gyz-N9-RLk"/>
+                            <constraint firstAttribute="bottom" secondItem="xdQ-sk-FR0" secondAttribute="bottom" id="nS7-1i-AgX"/>
+                        </constraints>
                     </view>
                 </collectionViewItem>
                 <customObject id="6FT-oB-rhv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1169" y="905"/>
+            <point key="canvasLocation" x="1211" y="925"/>
         </scene>
     </scenes>
     <resources>

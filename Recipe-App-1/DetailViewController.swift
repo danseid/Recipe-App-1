@@ -47,7 +47,8 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     }
     
     @IBAction func recipeImageWellActive(sender: AnyObject) {
-        self.displayRecipe!.image = self.recipeImageWell.image
+        var image: NSImage = self.recipeImageWell.image!
+        self.displayRecipe!.image = image //self.recipeImageWell.image
         self.configureDisplayRecipe()
         self.updateSidebarViewController()
     }
@@ -58,7 +59,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     }
     
     func updateSidebarViewController() {
-        if let sidebarView = self.parentViewController!.childViewControllers[0] as? SidebarViewController {
+        if let sidebarView = self.parentViewController?.parentViewController?.childViewControllers[0] as? SidebarViewController {
             sidebarView.reloadSelectedRecipeRow()
         }
     }
@@ -127,7 +128,6 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         var object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
         
         if object is Ingredient {
-            println("Here")
             self.performSegueWithIdentifier("ingredientsPopover", sender: self)
         }
 

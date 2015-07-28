@@ -181,6 +181,10 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
             }
             detailTabView.displayRecipeDetail()
         } else if (object is Category) {
+            if let categoryCollectionTab = detailTabView.categoryCollectionTab.viewController as? CategoryCollectionViewController {
+                categoryCollectionTab.displayCategory = (object as! Category)
+                categoryCollectionTab.displaySelectedCategory()
+            }
             detailTabView.displayCategoryCollection()
         }
         
