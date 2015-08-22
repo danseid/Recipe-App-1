@@ -27,6 +27,9 @@ class DetailTabViewController: NSTabViewController {
     }
     
     func displayCategoryDetail() {
+        if let categoryDetailView = self.categoryDetailTab.viewController as? CategoryTableViewController {
+            categoryDetailView.categoryDetailTableViewController.reloadData()
+        }
         self.selectedTabViewItemIndex = 2
     }
 }

@@ -15,6 +15,7 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
     @IBOutlet weak var sidebarDeleteButton: NSButton!
 
     var displayRecipe: Recipe?
+    var segmentedControlState: Int = 0
     
     var recipes = [Recipe]()
     var categories = [Category]()
@@ -185,7 +186,14 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
                 categoryCollectionTab.displayCategory = (object as! Category)
                 categoryCollectionTab.displaySelectedCategory()
             }
-            detailTabView.displayCategoryCollection()
+            if let categoryDetailTab = detailTabView.categoryDetailTab.viewController as? CategoryTableViewController {
+                categoryDetailTab.displayCategory = (object as! Category)
+            }
+            if self.segmentedControlState == 0 {
+                detailTabView.displayCategoryCollection()
+            } else if self.segmentedControlState == 1 {
+                detailTabView.displayCategoryDetail()
+            }
         }
         
         if object != nil {

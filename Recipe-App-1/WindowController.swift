@@ -30,10 +30,11 @@ class WindowController: NSWindowController {
     
     @IBAction func toolbarCategoryViewButtonActive(sender: AnyObject) {
         if let detailTabView = self.splitViewController.detailSubView.viewController as? DetailTabViewController {
-            if detailTabView.selectedTabViewItemIndex == 1 {
-                detailTabView.selectedTabViewItemIndex = 2
-            } else if detailTabView.selectedTabViewItemIndex == 2 {
-                detailTabView.selectedTabViewItemIndex = 1
+            if detailTabView.selectedTabViewItemIndex != 0 {
+                if let sidebarView = self.splitViewController.sidebarSubView.viewController as? SidebarViewController {
+                    detailTabView.selectedTabViewItemIndex = self.categoryViewSelector.selectedSegment + 1
+                    sidebarView.segmentedControlState = self.categoryViewSelector.selectedSegment
+                }
             }
         }
     }

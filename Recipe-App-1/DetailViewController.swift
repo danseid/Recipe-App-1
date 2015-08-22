@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSSplitViewDelegate {
 
     @IBOutlet weak var recipeImageWell: NSImageView!
     @IBOutlet weak var recipeTextField: NSTextField!
@@ -22,9 +22,12 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         super.viewDidLoad()
         //self.recipeIngredientsOutlineView.headerView.
         // Do view setup here.
-        //self.recipeDetailSplitView
     }
     
+    override func viewDidAppear() {
+        self.recipeDetailSplitView.setPosition(200, ofDividerAtIndex: 0)
+    }
+
     var displayRecipe: Recipe? {
         didSet {
             // Update the view.
