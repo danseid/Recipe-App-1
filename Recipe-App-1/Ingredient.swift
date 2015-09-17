@@ -11,20 +11,20 @@ import Cocoa
 class Ingredient: NSObject, NSCoding {
     
     var name: String
-    var quantity: Double?
+    var quantity: NSNumber?
     var unit: unitEnum?
     var preparation: String?
     var notes: String?
     
     override init() {
         self.name = String()
-        self.quantity = Double()
+        self.quantity = NSNumber()
         self.unit = unitEnum.none
         self.preparation = String()
         self.notes = String()
     }
     
-    init(name: String, quantity: Double?, unit: unitEnum?, preparation: String?, notes: String?) {
+    init(name: String, quantity: NSNumber?, unit: unitEnum?, preparation: String?, notes: String?) {
         self.name = name
         self.quantity = quantity
         self.unit = unit
@@ -40,10 +40,10 @@ class Ingredient: NSObject, NSCoding {
         coder.encodeObject(self.notes, forKey: "ingredientNotes")
     }
     
-    required convenience init(coder decoder: NSCoder) {
+    required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.name = decoder.decodeObjectForKey( "ingredientName" ) as! String
-        self.quantity = decoder.decodeObjectForKey( "ingredientQuantity" ) as! Double?
+        self.quantity = decoder.decodeObjectForKey( "ingredientQuantity" ) as! NSNumber?
         self.unit = unitEnum(rawValue: decoder.decodeObjectForKey("ingredientUnit" ) as! String )
         self.preparation = decoder.decodeObjectForKey( "ingredientPreparation" ) as! String?
         self.notes = decoder.decodeObjectForKey( "ingredientNotes" ) as! String?

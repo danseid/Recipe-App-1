@@ -20,7 +20,6 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.recipeIngredientsOutlineView.headerView.
         // Do view setup here.
     }
     
@@ -50,7 +49,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     }
     
     @IBAction func recipeImageWellActive(sender: AnyObject) {
-        var image: NSImage = self.recipeImageWell.image!
+        let image: NSImage = self.recipeImageWell.image!
         self.displayRecipe!.image = image //self.recipeImageWell.image
         self.configureDisplayRecipe()
         self.updateSidebarViewController()
@@ -127,8 +126,8 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     }
     
     func outlineViewSelectionDidChange(notification: NSNotification){  // Retrieve selected object from OutlineView
-        var selectedIndex = notification.object?.selectedRow
-        var object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
+        let selectedIndex = notification.object?.selectedRow
+        let object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
         
         if object is Ingredient {
             self.performSegueWithIdentifier("ingredientsPopover", sender: self)

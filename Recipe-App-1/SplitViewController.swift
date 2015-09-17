@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SplitViewController: NSSplitViewController, NSSplitViewDelegate {
+class SplitViewController: NSSplitViewController {
     
     @IBOutlet weak var mainSplitView: NSSplitView!
     @IBOutlet weak var sidebarSubView: NSSplitViewItem!

@@ -28,7 +28,7 @@ class Instruction: NSObject, NSCoding {
         coder.encodeObject(self.step, forKey: "instructionStep")
     }
     
-    required convenience init(coder decoder: NSCoder) {
+    required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.text = decoder.decodeObjectForKey( "instructionText" ) as! String
         self.step = decoder.decodeObjectForKey( "instructionStep" ) as! Int

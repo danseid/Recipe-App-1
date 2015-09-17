@@ -32,7 +32,7 @@ class IngredientGroup: NSObject, NSCoding {
         coder.encodeObject(self.isExpanded, forKey: "ingredientGroupIsExpanded")
     }
     
-    required convenience init(coder decoder: NSCoder) {
+    required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.name = decoder.decodeObjectForKey( "ingredientGroupName" ) as! String
         self.ingredients = decoder.decodeObjectForKey("ingredientGroupIngredients") as! [Ingredient]

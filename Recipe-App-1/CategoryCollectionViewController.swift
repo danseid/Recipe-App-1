@@ -23,10 +23,12 @@ class CategoryCollectionViewController: NSViewController, NSCollectionViewDelega
     }
     
     func displaySelectedCategory() {
-        println(self.displayCategory.name)
+        print(self.displayCategory.name)
+        print(self.displayImages)
         self.displayImages.removeAllObjects()
+        print(self.displayImages) 
         for recipe in self.displayCategory.recipes {
-            println(recipe.name)
+            print(recipe.name)
             self.categoryCollectionViewArray.addObject(recipe as Recipe)
         }
     }

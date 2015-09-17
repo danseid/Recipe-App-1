@@ -10,37 +10,69 @@ import Cocoa
 
 class IngredientsPopover: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
+    @IBOutlet weak var ingredientsPopoverTableView: NSTableView!
+    
     var ingredients: [AnyObject]!
+    var expandedIngredients: [AnyObject] = [AnyObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        //self.ingredientsPopoverTableView.headerView.
+        self.expandIngredientGroups()
     }
     
-    
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return self.ingredients.count
-    }
-    
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        
-        var cellView: NSTableCellView = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
-        
-        if let ingredient = self.ingredients[row] as? Ingredient {
-            if tableColumn!.identifier == "quantity" {
-                cellView.textField!.doubleValue = ingredient.quantity!
-            }
-            else if tableColumn!.identifier == "unit" {
-                cellView.textField!.stringValue = ingredient.unit!.rawValue
-            }
-            else if tableColumn!.identifier == "ingredient" {
-                cellView.textField!.stringValue = ingredient.name
-            }
-            else {
-                cellView.textField!.stringValue = ingredient.preparation!
+    func expandIngredientGroups() {
+        for item in self.ingredients {
+            self.expandedIngredients.append(item)
+            if item is IngredientGroup {
+                self.expandedIngredients.appendContentsOf(item.ingredients)
             }
         }
-        
-        return cellView
+    }
+    
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+        return self.expandedIngredients.count
+    }
+    
+    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+        if let ingredient = self.expandedIngredients[row] as? Ingredient {
+            if tableColumn!.identifier == "quantity" {
+                return ingredient.quantity
+            }
+            else if tableColumn!.identifier == "unit" {
+                return ingredient.unit!.rawValue
+            }
+            else if tableColumn!.identifier == "ingredient" {
+                return ingredient.name
+            }
+            else {
+                return ingredient.preparation!
+            }
+        } else if let ingredientGroup = self.expandedIngredients[row] as? IngredientGroup {
+            if tableColumn!.identifier == "quantity" {
+                return ingredientGroup.name
+            }
+        }
+        return nil
+    }
+
+    func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
+        if let ingredient = self.expandedIngredients[row] as? Ingredient {
+            switch tableColumn!.identifier {
+            case "quantity":
+                ingredient.quantity = object as? NSNumber
+            case "unit":
+                ingredient.unit = Ingredient.unitEnum(rawValue: (object as? String)!)
+            case "ingredient":
+                ingredient.name = (object as? String)!
+            default:
+                ingredient.preparation = object as? String
+            }
+        } else if let ingredientGroup = self.expandedIngredients[row] as? IngredientGroup {
+            if tableColumn!.identifier == "quantity" {
+                ingredientGroup.name = (object as? String)!
+            }
+        }
     }
 }

@@ -29,7 +29,7 @@ class CategoryTableViewController: NSViewController, NSTableViewDataSource, NSTa
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) ->NSView? {
-        var cellView: CategoryTableViewCell = tableView.makeViewWithIdentifier("recipeCell", owner: self) as! CategoryTableViewCell
+        let cellView: CategoryTableViewCell = tableView.makeViewWithIdentifier("recipeCell", owner: self) as! CategoryTableViewCell
         
         cellView.recipeTitleField.stringValue = self.displayCategory.recipes[row].name
         cellView.recipeCategoriesField.stringValue = self.displayCategory.name
@@ -42,7 +42,7 @@ class CategoryTableViewController: NSViewController, NSTableViewDataSource, NSTa
 //    }
     
     func doubleClickTableViewSelection() {
-        var selectedIndex = self.categoryDetailTableViewController.selectedRow
+        let selectedIndex = self.categoryDetailTableViewController.selectedRow
         let detailTabView = self.parentViewController as! DetailTabViewController
         
         if let recipeDetailView = detailTabView.recipeDetailTab.viewController as? DetailViewController {

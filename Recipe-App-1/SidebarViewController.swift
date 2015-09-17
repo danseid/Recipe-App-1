@@ -25,8 +25,6 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
         // Do view setup here.
         let appDelegate = NSApplication.sharedApplication().delegate as? AppDelegate
         appDelegate?.sidebarViewController = self
-        //self.setupNewRecipesCategory()
-        //self.setupSampleRecipes()
     }
     
     override var representedObject: AnyObject? {
@@ -63,7 +61,7 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
 
     @IBAction func deleteRecipeButtonActive(sender: AnyObject) {
         let selectedItem: AnyObject? = self.sidebarOutlineView.itemAtRow(self.sidebarOutlineView.selectedRow)
-        let selectedItemParent: AnyObject? = self.sidebarOutlineView.parentForItem(selectedItem)
+        //let selectedItemParent: AnyObject? = self.sidebarOutlineView.parentForItem(selectedItem)
         switch selectedItem {
         case let recipe as Recipe:
             for category in recipe.categories {
@@ -76,7 +74,7 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
             }
             self.categories = self.categories.filter({$0 != category})
         default:
-            println("Invalid item")
+            print("Invalid item")
         }
         self.sidebarOutlineView.reloadData()
     }
@@ -170,10 +168,10 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
     }
     
     func outlineViewSelectionDidChange(notification: NSNotification){  // Retrieve selected object from OutlineView
-        var selectedIndex = notification.object?.selectedRow
-        var object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
+        let selectedIndex = notification.object?.selectedRow
+        let object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
         let detailTabView = self.parentViewController?.childViewControllers[1] as! DetailTabViewController
-        let categoryViewButton = self.parentViewController
+        //let categoryViewButton = self.parentViewController
         
         if (object is Recipe){
             self.displayRecipe = (object as! Recipe)

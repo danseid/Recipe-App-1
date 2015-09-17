@@ -44,7 +44,7 @@ class Category: NSObject, NSCoding {
         coder.encodeObject(self.icon, forKey: "categoryIcon")
     }
     
-    required convenience init(coder decoder: NSCoder) {
+    required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.name = decoder.decodeObjectForKey( "categoryName" ) as! String
         self.desc = decoder.decodeObjectForKey( "categoryDesc" ) as! String?

@@ -52,7 +52,7 @@ class Recipe: NSObject, NSCoding {
         coder.encodeObject(self.image, forKey: "recipeImage")
     }
     
-    required convenience init(coder decoder: NSCoder) {
+    required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.name = decoder.decodeObjectForKey( "recipeName" ) as! String
         self.rating = decoder.decodeObjectForKey( "recipeRating" ) as! Double?
