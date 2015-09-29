@@ -14,12 +14,14 @@ class IngredientsPopover: NSViewController, NSTableViewDelegate, NSTableViewData
     
     var ingredients: [AnyObject]!
     var expandedIngredients: [AnyObject] = [AnyObject]()
+    var originalIngredients: [AnyObject] = [AnyObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         //self.ingredientsPopoverTableView.headerView.
         self.expandIngredientGroups()
+        self.originalIngredients = self.expandedIngredients
     }
     
     func expandIngredientGroups() {
@@ -29,6 +31,10 @@ class IngredientsPopover: NSViewController, NSTableViewDelegate, NSTableViewData
                 self.expandedIngredients.appendContentsOf(item.ingredients)
             }
         }
+    }
+    @IBAction func cancelButtonActive(sender: AnyObject) {
+        self.expandedIngredients = self.originalIngredients
+        self.dismissViewController(self)
     }
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
@@ -61,7 +67,8 @@ class IngredientsPopover: NSViewController, NSTableViewDelegate, NSTableViewData
         if let ingredient = self.expandedIngredients[row] as? Ingredient {
             switch tableColumn!.identifier {
             case "quantity":
-                ingredient.quantity = object as? NSNumber
+                let form: NSNumberFormatter = NSNumberFormatter()
+                ingredient.quantity = form.numberFromString(object as! String)
             case "unit":
                 ingredient.unit = Ingredient.unitEnum(rawValue: (object as? String)!)
             case "ingredient":

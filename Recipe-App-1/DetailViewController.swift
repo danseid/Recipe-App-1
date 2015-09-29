@@ -21,6 +21,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        print(self.recipeIngredientsOutlineView.autosaveExpandedItems)
     }
     
     override func viewDidAppear() {
@@ -96,13 +97,10 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         return self.recipe.ingredients.count
     }
     
-//    func outlineView(outlineView: NSOutlineView, isGroupItem item: AnyObject) -> Bool {
-//        if let it = item as? IngredientGroup {
-//            return false
-//        }
-//        return true
+//    func expandOutlineViewItems() {
+//        let outlineView = self.recipeIngredientsOutlineView as NSOutlineView
+//        for i in outlineView.
 //    }
-
 
     // Function to implement the NSOutlineView Delegate
     
