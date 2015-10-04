@@ -16,7 +16,7 @@ class Ingredient: NSObject, NSCoding {
     var preparation: String?
     var notes: String?
     
-    override init() {
+    required override init() {
         self.name = String()
         self.quantity = NSNumber()
         self.unit = unitEnum.none
@@ -30,6 +30,16 @@ class Ingredient: NSObject, NSCoding {
         self.unit = unit
         self.preparation = preparation
         self.notes = notes
+    }
+    
+    override func copy() -> AnyObject {
+        let ingredientCopy = self.dynamicType.init()
+        ingredientCopy.name = self.name
+        ingredientCopy.quantity = self.quantity
+        ingredientCopy.unit = self.unit
+        ingredientCopy.preparation = self.preparation
+        ingredientCopy.notes = self.notes
+        return ingredientCopy
     }
     
     func encodeWithCoder(coder: NSCoder) {

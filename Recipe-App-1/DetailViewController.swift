@@ -17,6 +17,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     @IBOutlet weak var recipeDetailSplitView: NSSplitView!
     
     var recipe = Recipe()
+    var editedRecipeIngredients: [AnyObject]!
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,7 +128,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         let selectedIndex = notification.object?.selectedRow
         let object:AnyObject? = notification.object?.itemAtRow(selectedIndex!)
         
-        if object is Ingredient {
+        if object is Ingredient || object is IngredientGroup {
             self.performSegueWithIdentifier("ingredientsPopover", sender: self)
         }
 
@@ -136,8 +137,17 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ingredientsPopover" {
             if let destination = segue.destinationController as? IngredientsPopover {
-                destination.ingredients = self.recipe.ingredients
+                self.editedRecipeIngredients = self.recipe.copyIngredients()
+                destination.ingredients = self.editedRecipeIngredients
+                destination.parentVC = self
             }
+        }
+    }
+    
+    func returnFromIngredientsPopover(status: Bool) {
+        if !status {
+            self.recipe.ingredients = self.editedRecipeIngredients
+            self.recipeIngredientsOutlineView.reloadData()
         }
     }
 }

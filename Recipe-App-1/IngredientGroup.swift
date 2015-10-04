@@ -14,7 +14,7 @@ class IngredientGroup: NSObject, NSCoding {
     var ingredients: [Ingredient]
     var isExpanded: Bool
     
-    override init() {
+    required override init() {
         self.name = String()
         self.ingredients = [Ingredient]()
         self.isExpanded = Bool()
@@ -24,6 +24,14 @@ class IngredientGroup: NSObject, NSCoding {
         self.name = name
         self.ingredients = ingredients
         self.isExpanded = true
+    }
+    
+    override func copy() -> AnyObject {
+        let ingredientsGroupCopy = self.dynamicType.init()
+        ingredientsGroupCopy.name = self.name
+        ingredientsGroupCopy.ingredients = self.ingredients
+        ingredientsGroupCopy.isExpanded = self.isExpanded
+        return ingredientsGroupCopy
     }
     
     func encodeWithCoder(coder: NSCoder) {

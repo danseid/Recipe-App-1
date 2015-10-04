@@ -42,6 +42,18 @@ class Recipe: NSObject, NSCoding {
     func removeCategory(category: Category) {
         self.categories = self.categories.filter({$0 != category})
     }
+    
+    func copyIngredients() -> [AnyObject] {
+        var ingredientsCopy: [AnyObject] = [AnyObject]()
+        for object in self.ingredients {
+            if let ingredient = object as? Ingredient {
+                ingredientsCopy.append(ingredient.copy())
+            } else if let ingredientGroup = object as? IngredientGroup {
+                ingredientsCopy.append(ingredientGroup.copy())
+            }
+        }
+        return ingredientsCopy
+    }
 
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.name, forKey: "recipeName")

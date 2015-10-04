@@ -14,14 +14,21 @@ class IngredientsPopover: NSViewController, NSTableViewDelegate, NSTableViewData
     
     var ingredients: [AnyObject]!
     var expandedIngredients: [AnyObject] = [AnyObject]()
-    var originalIngredients: [AnyObject] = [AnyObject]()
+    var parentVC: NSViewController!
+    var cancelled: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         //self.ingredientsPopoverTableView.headerView.
         self.expandIngredientGroups()
-        self.originalIngredients = self.expandedIngredients
+    }
+    
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        if let parent = self.parentVC as? DetailViewController {
+            parent.returnFromIngredientsPopover(cancelled)
+        }
     }
     
     func expandIngredientGroups() {
@@ -32,8 +39,9 @@ class IngredientsPopover: NSViewController, NSTableViewDelegate, NSTableViewData
             }
         }
     }
+
     @IBAction func cancelButtonActive(sender: AnyObject) {
-        self.expandedIngredients = self.originalIngredients
+        self.cancelled = true
         self.dismissViewController(self)
     }
     
