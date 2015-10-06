@@ -8,13 +8,14 @@
 
 import Cocoa
 
-class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSSplitViewDelegate {
+class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTableViewDataSource, NSTableViewDelegate, NSSplitViewDelegate {
 
     @IBOutlet weak var recipeImageWell: NSImageView!
     @IBOutlet weak var recipeTextField: NSTextField!
     @IBOutlet weak var recipeIngredientsOutlineView: NSOutlineView!
     @IBOutlet weak var dropImageLabel: NSTextField!
     @IBOutlet weak var recipeDetailSplitView: NSSplitView!
+    @IBOutlet weak var recipeIngredientsTableView: NSTableView!
     
     var recipe = Recipe()
     var editedRecipeIngredients: [AnyObject]!
@@ -22,7 +23,6 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        print(self.recipeIngredientsOutlineView.autosaveExpandedItems)
     }
     
     override func viewDidAppear() {
@@ -98,10 +98,28 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         return self.recipe.ingredients.count
     }
     
-//    func expandOutlineViewItems() {
-//        let outlineView = self.recipeIngredientsOutlineView as NSOutlineView
-//        for i in outlineView.
+    func expandOutlineViewItems() {
+        
+    }
+    
+//    func outlineView(outlineView: NSOutlineView, shouldExpandItem item: AnyObject) -> Bool {
+//        if let it = item as? IngredientGroup {
+//            return it.isExpanded
+//        }
+//        return false
 //    }
+    
+    func outlineViewItemDidExpand(notification: NSNotification) {
+        if let item = notification.object as? IngredientGroup {
+            item.isExpanded = true
+        }
+    }
+    
+    func outlineViewItemDidCollapse(notification: NSNotification) {
+        if let item = notification.object as? IngredientGroup {
+            item.isExpanded = false
+        }
+    }
 
     // Function to implement the NSOutlineView Delegate
     
@@ -150,4 +168,29 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
             self.recipeIngredientsOutlineView.reloadData()
         }
     }
+    
+    // Functions to implement the NSTableView DataSource/Delegate
+    
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+        return self.recipe.instructions.count + 1
+    }
+    
+    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+        if row < self.recipe.instructions.count {
+            if let instruction = self.recipe.instructions[row] as Instruction? {
+                return instruction.text
+            }
+        } else {
+            return "Add Instruction"
+        }
+        return nil
+    }
+    
+    func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
+        if let instruction = self.recipe.instructions[row] as Instruction? {
+            instruction.text = (object as? String)!
+        }
+    }
+    
+    
 }

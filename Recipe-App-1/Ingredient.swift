@@ -15,6 +15,7 @@ class Ingredient: NSObject, NSCoding {
     var unit: unitEnum?
     var preparation: String?
     var notes: String?
+    var inGroup: Bool
     
     required override init() {
         self.name = String()
@@ -22,14 +23,16 @@ class Ingredient: NSObject, NSCoding {
         self.unit = unitEnum.none
         self.preparation = String()
         self.notes = String()
+        self.inGroup = Bool()
     }
     
-    init(name: String, quantity: NSNumber?, unit: unitEnum?, preparation: String?, notes: String?) {
+    init(name: String, quantity: NSNumber?, unit: unitEnum?, preparation: String?, notes: String?, inGroup: Bool) {
         self.name = name
         self.quantity = quantity
         self.unit = unit
         self.preparation = preparation
         self.notes = notes
+        self.inGroup = inGroup
     }
     
     override func copy() -> AnyObject {
@@ -39,6 +42,7 @@ class Ingredient: NSObject, NSCoding {
         ingredientCopy.unit = self.unit
         ingredientCopy.preparation = self.preparation
         ingredientCopy.notes = self.notes
+        ingredientCopy.inGroup = self.inGroup
         return ingredientCopy
     }
     
@@ -48,6 +52,7 @@ class Ingredient: NSObject, NSCoding {
         coder.encodeObject(self.unit?.rawValue, forKey: "ingredientUnit" )
         coder.encodeObject(self.preparation, forKey: "ingredientPreparation")
         coder.encodeObject(self.notes, forKey: "ingredientNotes")
+        coder.encodeObject(self.inGroup, forKey: "ingredientInGroup")
     }
     
     required convenience init?(coder decoder: NSCoder) {
@@ -57,6 +62,7 @@ class Ingredient: NSObject, NSCoding {
         self.unit = unitEnum(rawValue: decoder.decodeObjectForKey("ingredientUnit" ) as! String )
         self.preparation = decoder.decodeObjectForKey( "ingredientPreparation" ) as! String?
         self.notes = decoder.decodeObjectForKey( "ingredientNotes" ) as! String?
+        self.inGroup = decoder.decodeObjectForKey("ingredientInGroup") as! Bool
     }
     
     enum unitEnum : String {
