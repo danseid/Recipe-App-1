@@ -11,39 +11,38 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    var sidebarViewController: SidebarViewController!
+    var sidebarViewController: SidebarViewController!  //Instantiate a SidebarViewController, the 'hub' of the program
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // Insert code here to initialize your application
         
         // For debugging/convenience only:
-        
-//        self.sidebarViewController.setupNewRecipesCategory()
-//        self.sidebarViewController.setupSampleRecipes()
+
         NSUserDefaults.standardUserDefaults().removeObjectForKey("recipes")
         NSUserDefaults.standardUserDefaults().removeObjectForKey("categories")
         
         // End of debugging code.
         
-        if let recipes = NSUserDefaults.standardUserDefaults().objectForKey("recipes") as? NSData {
-            if let unarchived = NSKeyedUnarchiver.unarchiveObjectWithData(recipes) as? [Recipe] {
-                self.sidebarViewController.recipes = unarchived
+        //Try to initialise Recipes from NSUserDefaults
+        if let recipesData = NSUserDefaults.standardUserDefaults().objectForKey("recipes") as? NSData {
+            if let unarchivedRecipes = NSKeyedUnarchiver.unarchiveObjectWithData(recipesData) as? [Recipe] {
+                self.sidebarViewController.recipes = unarchivedRecipes
             }
-        } else {
+        } else {  //If no Recipes are saved to NSUserDefaults, initialise with sample recipes and categories
             self.sidebarViewController.setupNewRecipesCategory()
             self.sidebarViewController.setupSampleRecipes()
         }
         
+        //Try to initilise Categories from NSUserDefaults
         if let categories = NSUserDefaults.standardUserDefaults().objectForKey("categories") as? NSData {
             self.sidebarViewController.categories = NSKeyedUnarchiver.unarchiveObjectWithData(categories) as! [Category]
-        } else {
         }
-        self.sidebarViewController.sidebarOutlineView.reloadData()
+        
+        self.sidebarViewController.sidebarOutlineView.reloadData()  //Refresh the Sidebar OutlineView
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
-        self.sidebarViewController.saveData()
+        
+        self.sidebarViewController.saveData()  //Save recipes and categories to NSUserDefaults
     }
 
 }

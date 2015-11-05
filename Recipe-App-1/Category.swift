@@ -37,6 +37,7 @@ class Category: NSObject, NSCoding {
         self.recipes = self.recipes.filter({$0 != recipe})
     }
     
+    //Implementation of NSCoding to allow saving to NSUserDefaults
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.name, forKey: "categoryName")
         coder.encodeObject(self.desc, forKey: "categoryDesc")
@@ -44,6 +45,7 @@ class Category: NSObject, NSCoding {
         coder.encodeObject(self.icon, forKey: "categoryIcon")
     }
     
+    //Implementation of NSCoding to retrieve from NSUserDefaults
     required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.name = decoder.decodeObjectForKey( "categoryName" ) as! String

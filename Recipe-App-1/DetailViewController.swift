@@ -15,7 +15,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     @IBOutlet weak var recipeIngredientsOutlineView: NSOutlineView!
     @IBOutlet weak var dropImageLabel: NSTextField!
     @IBOutlet weak var recipeDetailSplitView: NSSplitView!
-    @IBOutlet weak var recipeIngredientsTableView: NSTableView!
+    @IBOutlet weak var recipeInstructionsTableView: NSTableView!
     
     var recipe = Recipe()
     var editedRecipeIngredients: [AnyObject]!
@@ -23,10 +23,15 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        self.recipeInstructionsTableView.doubleAction = "doubleClickTableViewSelection"
     }
     
     override func viewDidAppear() {
         self.recipeDetailSplitView.setPosition(200, ofDividerAtIndex: 0)
+    }
+
+    override func viewDidLayout() {
+        self.recipeInstructionsTableView.reloadData()  // Allows for row heights to be updated when the tableview width is changed
     }
 
     var displayRecipe: Recipe? {
@@ -47,6 +52,7 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
                 self.dropImageLabel.stringValue = ""
             }
             self.recipeIngredientsOutlineView.reloadData()
+            self.recipeInstructionsTableView.reloadData()
         }
     }
     
@@ -98,9 +104,9 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         return self.recipe.ingredients.count
     }
     
-    func expandOutlineViewItems() {
-        
-    }
+//    func expandOutlineViewItems() {
+//        
+//    }
     
 //    func outlineView(outlineView: NSOutlineView, shouldExpandItem item: AnyObject) -> Bool {
 //        if let it = item as? IngredientGroup {
@@ -175,22 +181,56 @@ class DetailViewController: NSViewController, NSOutlineViewDataSource, NSOutline
         return self.recipe.instructions.count + 1
     }
     
-    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if row < self.recipe.instructions.count {
-            if let instruction = self.recipe.instructions[row] as Instruction? {
-                return instruction.text
+            if tableColumn?.identifier == "InstructionColumn" {
+                let view = self.recipeInstructionsTableView.makeViewWithIdentifier("InstructionCell", owner: self) as! DetailViewInstructionsTableViewCell
+                if let textView = view.recipeInstructionTextView.documentView as? NSTextView {
+                    textView.string = self.recipe.instructions[row].text
+                }
+                return view
             }
         } else {
-            return "Add Instruction"
+            let view = self.recipeInstructionsTableView.makeViewWithIdentifier("AddInstructionCell", owner: self) as! NSTableCellView
+            if let textField = view.textField {
+                textField.stringValue = "Add instruction"
+            }
+            return view
         }
         return nil
     }
     
-    func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
-        if let instruction = self.recipe.instructions[row] as Instruction? {
-            instruction.text = (object as? String)!
+    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        if row < self.recipe.instructions.count {
+            let prototypeView: NSTextView = NSTextView(frame: NSRect(x: 0, y: 0, width: self.recipeInstructionsTableView.tableColumns[0].width, height: 17))
+            prototypeView.string = self.recipe.instructions[row].text
+            prototypeView.horizontallyResizable = false
+            prototypeView.sizeToFit()
+            return prototypeView.frame.height
+        }
+        return 17
+    }
+
+    func tableViewSelectionDidChange(notification: NSNotification) {
+        let selectedIndex = notification.object?.selectedRow
+        if selectedIndex == self.recipe.instructions.count {
+            let newInstruction: Instruction = Instruction(text: "New instruction", step: self.recipe.instructions.count + 1)
+            self.recipe.instructions.append(newInstruction)
+            self.recipeInstructionsTableView.beginUpdates()
+            self.recipeInstructionsTableView.insertRowsAtIndexes(NSIndexSet(index: selectedIndex!), withAnimation: NSTableViewAnimationOptions.SlideDown)
+            self.recipeInstructionsTableView.endUpdates()
+
         }
     }
+    
+//    func doubleClickTableViewSelection() {
+//        let selectedIndex = self.recipeInstructionsTableView.selectedRow
+//        let selectedInstruction = self.recipe.instructions[selectedIndex]
+//        if selectedInstruction.text == "New instruction" {
+//            selectedInstruction.text = ""
+//        }
+//        self.recipeInstructionsTableView.reloadData()
+//    }
     
     
 }

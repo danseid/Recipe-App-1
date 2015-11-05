@@ -23,11 +23,13 @@ class Instruction: NSObject, NSCoding {
         self.step = step
     }
     
+    //Implementation of NSCoding to allow saving to NSUserDefaults
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.text, forKey: "instructionText")
         coder.encodeObject(self.step, forKey: "instructionStep")
     }
     
+    //Implementation of NSCoding to retrieve from NSUserDefaults
     required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.text = decoder.decodeObjectForKey( "instructionText" ) as! String

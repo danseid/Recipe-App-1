@@ -16,7 +16,7 @@ class SplitViewController: NSSplitViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
-        self.mainSplitView.setPosition(200, ofDividerAtIndex: 0)
+        
+        self.mainSplitView.setPosition(200, ofDividerAtIndex: 0)  //Set initial width of the SidebarVC
     }
 }

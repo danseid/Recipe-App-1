@@ -17,7 +17,7 @@ class Recipe: NSObject, NSCoding {
     var categories: [Category]
     var image: NSImage?
     
-    override init() {
+    override init() {  //Override NSObject default initialiser
         self.name = String()
         self.rating = 0.0
         self.ingredients = [AnyObject]()
@@ -26,6 +26,7 @@ class Recipe: NSObject, NSCoding {
         self.image = NSImage()
     }
     
+    //Default constructor
     init(name: String, rating: Double?, ingredients: [AnyObject], instructions: [Instruction], categories: [Category], image: NSImage?) {
         self.name = name
         self.rating = rating
@@ -35,18 +36,21 @@ class Recipe: NSObject, NSCoding {
         self.image = image
     }
     
+    //Add a category to the Recipe
     func addCategory(category: Category) {
         self.categories.append(category)
     }
     
+    //Remove a category from the Recipe, must do by filtering category list
     func removeCategory(category: Category) {
-        self.categories = self.categories.filter({$0 != category})
+        self.categories = self.categories.filter({$0 != category})  //Filter removes matching objects
     }
     
+    //Implement NSCopying for the list of Ingredients in order to pass-by-value
     func copyIngredients() -> [AnyObject] {
         var ingredientsCopy: [AnyObject] = [AnyObject]()
         for object in self.ingredients {
-            if let ingredient = object as? Ingredient {
+            if let ingredient = object as? Ingredient {  //Must discern whether Ingredient or IngredientGroup to use correct NSCopying implementation
                 ingredientsCopy.append(ingredient.copy())
             } else if let ingredientGroup = object as? IngredientGroup {
                 ingredientsCopy.append(ingredientGroup.copy())
@@ -55,6 +59,7 @@ class Recipe: NSObject, NSCoding {
         return ingredientsCopy
     }
 
+    //Impelmentation NSCoding to allow Recipe to be saved to NSUserDefaults
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.name, forKey: "recipeName")
         coder.encodeObject(self.rating, forKey: "recipeRating")
@@ -64,6 +69,7 @@ class Recipe: NSObject, NSCoding {
         coder.encodeObject(self.image, forKey: "recipeImage")
     }
     
+    //Implementation of NSCoding to retrieve Recipe from NSUserDefaults
     required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.name = decoder.decodeObjectForKey( "recipeName" ) as! String

@@ -26,6 +26,7 @@ class IngredientGroup: NSObject, NSCoding {
         self.isExpanded = true
     }
     
+    //Implementation of NSCopying protocol
     override func copy() -> AnyObject {
         let ingredientsGroupCopy = self.dynamicType.init()
         ingredientsGroupCopy.name = self.name
@@ -34,12 +35,14 @@ class IngredientGroup: NSObject, NSCoding {
         return ingredientsGroupCopy
     }
     
+    //Implementation of NSCoding to allow saving to NSUserDefaults
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.name, forKey: "ingredientGroupName")
         coder.encodeObject(self.ingredients, forKey: "ingredientGroupIngredients")
         coder.encodeObject(self.isExpanded, forKey: "ingredientGroupIsExpanded")
     }
     
+    //Implementation of NSCoding to retrieve from NSUserDefaults
     required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.name = decoder.decodeObjectForKey( "ingredientGroupName" ) as! String

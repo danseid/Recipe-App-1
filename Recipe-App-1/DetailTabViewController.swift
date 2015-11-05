@@ -8,14 +8,15 @@
 
 import Cocoa
 
+//Contains the details views: DetailViewController for recipes, and the CategoryCollectionVC and CategoryTableVC for categories
 class DetailTabViewController: NSTabViewController {
+    
     @IBOutlet weak var recipeDetailTab: NSTabViewItem!
     @IBOutlet weak var categoryCollectionTab: NSTabViewItem!
     @IBOutlet weak var categoryDetailTab: NSTabViewItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
     }
     
     func displayRecipeDetail() {

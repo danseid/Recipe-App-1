@@ -35,6 +35,7 @@ class Ingredient: NSObject, NSCoding {
         self.inGroup = inGroup
     }
     
+    //Implementation of NSCopying protocol
     override func copy() -> AnyObject {
         let ingredientCopy = self.dynamicType.init()
         ingredientCopy.name = self.name
@@ -46,6 +47,7 @@ class Ingredient: NSObject, NSCoding {
         return ingredientCopy
     }
     
+    //Implementation of NSCoding to allow saving to NSUserDefaults
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(self.name, forKey: "ingredientName")
         coder.encodeObject(self.quantity, forKey: "ingredientQuantity")
@@ -55,6 +57,7 @@ class Ingredient: NSObject, NSCoding {
         coder.encodeObject(self.inGroup, forKey: "ingredientInGroup")
     }
     
+    //Implementation of NSCoding to retrieve from NSUserDefaults
     required convenience init?(coder decoder: NSCoder) {
         self.init()
         self.name = decoder.decodeObjectForKey( "ingredientName" ) as! String
@@ -75,7 +78,7 @@ class Ingredient: NSObject, NSCoding {
         ml = "ml"
     }
     
-    func tableDisplayString() -> String {  // Return a ingredient format to display in DetailView table
+    func tableDisplayString() -> String {  // Return an Ingredient format to display in DetailView table
         var integerQuantity: Int
         if let quantity = self.quantity as Double? {
             if quantity % 1.0 == 0 {  // Avoid unnecessary decimal points

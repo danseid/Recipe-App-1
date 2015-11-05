@@ -8,33 +8,34 @@
 
 import Cocoa
 
+//The core of the application for now, data distribution wise.
 class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineViewDataSource {
     
     @IBOutlet weak var sidebarSearchField: NSSearchField!
     @IBOutlet weak var sidebarOutlineView: NSOutlineView!
     @IBOutlet weak var sidebarDeleteButton: NSButton!
 
-    var displayRecipe: Recipe?
-    var segmentedControlState: Int = 0
+    var displayRecipe: Recipe?  //Keeps track of which recipe is displayed in the DetailVC
+    var segmentedControlState: Int = 0  //Keeps track of which view type is selected for the CategoryTabVC
     
-    var recipes = [Recipe]()
-    var categories = [Category]()
+    var recipes = [Recipe]()  //All recipes saved in the program
+    var categories = [Category]()  //All categories saved in the program
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        let appDelegate = NSApplication.sharedApplication().delegate as? AppDelegate
-        appDelegate?.sidebarViewController = self
+        let appDelegate = NSApplication.sharedApplication().delegate as? AppDelegate  //Retrieve AppDelegate
+        appDelegate?.sidebarViewController = self  //Retrieve instance of SidebarVC created in AppDelegate
     }
     
     override var representedObject: AnyObject? {
         didSet {
-            // Update the view, if already loaded.
+            // Update the view, if already loaded. Needed?
         }
     }
     
     func setupSampleRecipes() {
-        let sampleRecipe1 = Recipe(name: "Salmon", rating: 4.0, ingredients: [Ingredient(name: "Potatoes", quantity: 200.0, unit: Ingredient.unitEnum.g, preparation: "mashed", notes: "", inGroup: false), IngredientGroup(name: "Group1", ingredients: [Ingredient(name: "Salmon Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: "", inGroup: true)]), IngredientGroup(name: "Group2", ingredients: [Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "", inGroup: true)]), IngredientGroup(name: "Group3", ingredients: [Ingredient(name: "Broccoli", quantity: 1, unit: Ingredient.unitEnum.none, preparation: "", notes: "", inGroup: true), Ingredient(name: "Spinach", quantity: 200, unit: Ingredient.unitEnum.g, preparation: "fresh", notes: "", inGroup: true)])], instructions: [Instruction(text: "Do stuff and stuff", step: 1)], categories: [], image: NSImage(named: "Salmon"))
+        let sampleRecipe1 = Recipe(name: "Salmon", rating: 4.0, ingredients: [Ingredient(name: "Potatoes", quantity: 200.0, unit: Ingredient.unitEnum.g, preparation: "mashed", notes: "", inGroup: false), IngredientGroup(name: "Group1", ingredients: [Ingredient(name: "Salmon Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: "", inGroup: true)]), IngredientGroup(name: "Group2", ingredients: [Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "", inGroup: true)]), IngredientGroup(name: "Group3", ingredients: [Ingredient(name: "Broccoli", quantity: 1, unit: Ingredient.unitEnum.none, preparation: "", notes: "", inGroup: true), Ingredient(name: "Spinach", quantity: 200, unit: Ingredient.unitEnum.g, preparation: "fresh", notes: "", inGroup: true)])], instructions: [Instruction(text: "Do stuff and stuff and more and another, then this then that with detail and more things and such.", step: 1)], categories: [], image: NSImage(named: "Salmon"))
         let sampleRecipe2 = Recipe(name: "Tuna", rating: 3.0, ingredients: [Ingredient(name: "Tuna Fillets", quantity: 2.0, unit: Ingredient.unitEnum.none, preparation: "", notes: "", inGroup: false), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "", inGroup: false)], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [], image: NSImage(named: "Tuna"))
         let sampleRecipe3 = Recipe(name: "Paella", rating: 5.0, ingredients: [Ingredient(name: "Chicken Thighs", quantity: 4.0, unit: Ingredient.unitEnum.none, preparation: "", notes: "", inGroup: false), Ingredient(name: "Green Beans", quantity: 100.0, unit: Ingredient.unitEnum.g, preparation: "", notes: "", inGroup: false)], instructions: [Instruction(text: "Do stuff and such.", step: 1)],categories: [], image: NSImage(named: "Paella"))
         
@@ -54,14 +55,18 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
         self.categories.append(sampleCategory2)
     }
     
-    func setupNewRecipesCategory() {  // Setup New Recipes category, the default initial category for all recipes
+    func setupNewRecipesCategory() {
+        // Setup New Recipes category, the default initial category for all newly created recipes
+        
         let newRecipesCategory = Category(name: "New Recipes", desc: "The most recently added recipes", recipes: [], icon: nil)
         self.categories.append(newRecipesCategory)
     }
 
     @IBAction func deleteRecipeButtonActive(sender: AnyObject) {
+        //Deletes the recipe or category selected in the sidebarOutlineView
+        
         let selectedItem: AnyObject? = self.sidebarOutlineView.itemAtRow(self.sidebarOutlineView.selectedRow)
-        //let selectedItemParent: AnyObject? = self.sidebarOutlineView.parentForItem(selectedItem)
+        
         switch selectedItem {
         case let recipe as Recipe:
             for category in recipe.categories {
@@ -76,7 +81,7 @@ class SidebarViewController: NSViewController, NSOutlineViewDelegate, NSOutlineV
         default:
             print("Invalid item")
         }
-        self.sidebarOutlineView.reloadData()
+        self.sidebarOutlineView.reloadData()  //Refresh outline view
     }
 
     @IBAction func addRecipeButtonActive(sender: AnyObject) {  // Implement 'Add recipe' Button
